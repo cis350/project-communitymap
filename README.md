@@ -1,3 +1,6 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7089741&assignment_repo_type=AssignmentRepo)
 
-See wiki for team agreement and Figma links.
+See wiki for team agreement, Figma links, and project planning.
+
+
+Problem statement: Our system is trying to address the issue of encouraging active community engagement, which is increasingly necessary due to the pandemic. Community service and engagement are important parts of being an active member in society, and the pandemic has forced people to stay home and engage with others less. Our goal is to help people easily jump right back into being active members of the community once the pandemic is over. We want to build a platform to facilitate community members supporting their local small businesses, parks, and other areas. Members of the city will benefit from engaging more with their neighborhood and other local gems of the city, and local business owners will benefit from customers. Making this information easy to digest through a map interface as well as grouping them by neighborhoods and communities will also make the product more impactful in communicating information effectively to the community.
