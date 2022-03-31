@@ -1,0 +1,43 @@
+[
+  {
+    "user_id": 123,
+    "username": "firstlast",
+    "password": "password",
+    "score": 0,
+    "events_list": [
+      {
+        "event_id": 1234,
+        "event_city": "Philadelphia",
+        "event_state": "PA",
+        "event_street": "111 Chestnut Street",
+        "event_postcode": "191304",
+        "lat": "60.169787",
+        "lng": "24.948776",
+        "event_name": "Name",
+        "event_start_date": "05/10/22",
+        "event_end_date": "05/10/22",
+        "event_details": "This event is XXXX and open to all ages."
+      },
+      {
+        "event_id": 1235,
+        "event_city": "Philadelphia",
+        "event_state": "PA",
+        "event_street": "111 Chestnut Street",
+        "event_postcode": "191304",
+        "lat": "60.169787",
+        "lng": "24.948776",
+        "event_name": "Name",
+        "event_start_date": "05/15/22",
+        "event_end_date": "05/20/22",
+        "event_details": "This event is XXXX and open to all ages."
+      }
+    ]
+  },
+  {
+    "user_id": 124,
+    "username": "firstlast",
+    "password": "password",
+    "score": 0,
+    "events_list": []
+  }
+]

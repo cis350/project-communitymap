@@ -1,7 +1,6 @@
 import React from 'react';
-import GoogleMapReact from 'google-map-react';
-import pin from './pin.png';
-const locations = require('./locations.json');
+//import GoogleMapReact from 'google-map-react';
+const locations = require('./users.json');
 
 class SimpleMap extends React.Component {
   static defaultProps = {
