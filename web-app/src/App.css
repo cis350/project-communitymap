@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .App-logo {
@@ -35,4 +36,37 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+nav {
+  background-color: #32f497;
+  border-bottom: "solid 1px";
+  padding-bottom: "1rem";
+  font-size: 30px;
+}
+
+div.center {
+  margin: auto;
+  width: 50%;
+  background-color: rgba(196, 196, 196, 0.5);
+  padding: 10px;
+  text-align: center;
+}
+
+p.signup {
+  text-align: right;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  background-color: rgba(196, 196, 196, 0.5);
+  text-align: center;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
 }
