@@ -1,17 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import  { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+
+// screen imports
+import LoginScreen from './LoginScreen';
 import BrowseEventsScreen from './BrowseEventsScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-   //Need to change initial route to login once login screen exists
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Browse Events">
-        <Stack.Screen options={{headerStyle:{backgroundColor:'#32f497',}}} name="Browse Events" component={BrowseEventsScreen} />
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          options={{ headerStyle: { backgroundColor: '#32f497' } }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          options={{ headerStyle: { backgroundColor: '#32f497' } }}
+          name="Browse Events"
+          component={BrowseEventsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
