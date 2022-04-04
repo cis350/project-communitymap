@@ -15,7 +15,7 @@ function LoginScreen({ navigation }) {
   async function checkUserInDatabase() {} // TODO: find/create user from database once backend is setup
 
   function handleLogin(e) {
-    if (!username.match('^[a-zA-Z0-9]*$')) {
+    if (!username.match('^[a-zA-Z0-9]*$') || username.length < 3) {
       alert('Error: Invalid username');
     } else if (password.length < 8) {
       alert('Error: Password must be at least 8 characters');
