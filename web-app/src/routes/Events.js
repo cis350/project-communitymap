@@ -16,6 +16,53 @@ export default function Events() {
           <Link to="/map">Map</Link>
         </nav>
         <h2>Events</h2>
+        <div class="flex-container">
+
+            <div class="flex-child">
+                <h2>My Events</h2>
+                <div class="scrollable-events-div">
+                  <div class="event-element-div">
+                    <p>List of events</p>
+                  </div>
+                
+                </div>
+                <p>My Community</p>
+                <p>ENTER COMMUNITY</p>
+            </div>
+            
+            <div class="flex-child">
+                <h2>Upcoming Events</h2>
+                <div class="scrollable-events-div">
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+                  <p>List of events</p>
+
+                </div>
+            </div>
+            
+        </div>
       </main>
     );
   }

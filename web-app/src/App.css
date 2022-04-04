@@ -70,3 +70,13 @@ p.signup {
 .flex-child:first-child {
   margin-right: 20px;
 }
+
+.scrollable-events-div {
+  overflow-y: scroll;
+  height: 500px;
+}
+
+.event-element-div {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: "10px";
+}
