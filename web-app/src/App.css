@@ -53,8 +53,8 @@ div.center {
   text-align: center;
 }
 
-p.signup {
-  text-align: right;
+button.signup {
+  float: right
 }
 
 .flex-container {

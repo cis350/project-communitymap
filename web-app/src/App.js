@@ -1,35 +1,49 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import { Link, Outlet} from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { React, useState } from 'react';
+
+import {
+  initLocalStorage,
+  getCommunityMember,
+} from './modules/storage';
+
 
 function App() {
-  function handleOnChange() {
+  const [username, setUsername] = useState("username");
+  const [password, setPassword] = useState("password");
+  const [errorMessage, setErrorMessage] = useState('');
+  let navigate = useNavigate(); 
 
+  //move to the home page with a log in
+  const handleLogin = (member) =>{ 
+    let path = `/home`; 
+    navigate(path);
   }
 
   function handleStart() {
+    try {
+      setErrorMessage('');
+      //gets the message from local storage
+      const member = getCommunityMember(username, password); 
+      console.log(member); 
+      handleLogin(member); 
+    } catch(e) {
+      console.log(e.message);
+      setErrorMessage(e.message); 
+    }
+  }
 
+  const handleSignup = () =>{ 
+    initLocalStorage(); 
+    let path = `/signup`; 
+    navigate(path);
   }
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>Hello</p>
-      </header> */}
       <div>
-        <nav class="navBar"
+        <nav className="navBar"
           style={{
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
@@ -44,16 +58,27 @@ function App() {
       </div>
       <div className='center'>
         <h2>Welcome!</h2>
+        <form>
+          <div>
+            <input
+              type="text" 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </form>
         <div>
-          <input type="text" onChange={handleOnChange} data-testid="username-input" value="username"/>
-        </div>
-        <div>
-          <input type="text" onChange={handleOnChange} data-testid="username-input" value="password"/>
-        </div>
-        <div>
+          {errorMessage && (<p className="error"> {errorMessage} </p>)}
           <button type="logIn" onClick={handleStart}>Log In</button>
+          <button className='signup' type="logIn" onClick={handleSignup}>Signup</button>
         </div>
-        <p className='signup'> Signup </p>
       </div>
     </div>
   );
