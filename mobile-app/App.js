@@ -8,6 +8,7 @@ import LoginScreen from './LoginScreen';
 //import HomeScreen from './HomeScreen';
 import BrowseEventsScreen from './BrowseEventsScreen';
 import HomeScreen from './HomeScreen'
+import MapScreen from './MapScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,11 @@ export default function App() {
           options={{ headerStyle: { backgroundColor: '#32f497' } }}
           name="Browse Events"
           component={BrowseEventsScreen}
+        />
+        <Stack.Screen
+          options={{ headerStyle: { backgroundColor: '#32f497' } }}
+          name="Map view"
+          component={MapScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

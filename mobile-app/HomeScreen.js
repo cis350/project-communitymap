@@ -21,6 +21,15 @@ function HomeScreen({ route, navigation }) {
     
   }
 
+  function handleMap(e) {
+
+    // TODO: change this to Home Page
+    navigation.navigate('Map view', {
+    user: username,
+    });
+    
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.spacer}></View>
@@ -33,7 +42,15 @@ function HomeScreen({ route, navigation }) {
           style={styles.btn}
           onPress={(e) => handleEvents(e)}
         >
-          <Text style={styles.loginText}>View Events</Text>
+          <Text style={styles.loginText}>Browse Events</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          title="map button"
+          style={styles.btn}
+          onPress={(e) => handleMap(e)}
+        >
+          <Text style={styles.loginText}>View Map</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
