@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-function LoginScreen({ navigation }) {
+function HomeScreen({ route, navigation }) {
+
+    const username = route.params;
   
   function handleEvents(e) {
 
@@ -40,7 +42,7 @@ function LoginScreen({ navigation }) {
     </View>
   );
 }
-export default LoginScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
