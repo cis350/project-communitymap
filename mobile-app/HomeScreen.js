@@ -7,53 +7,31 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
- 
 
 function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  
+  function handleEvents(e) {
 
-  async function checkUserInDatabase() {} // TODO: find/create user from database once backend is setup
-
-  function handleLogin(e) {
-    if (!username.match('^[a-zA-Z0-9]*$') || username.length < 3) {
-      alert('Error: Invalid username');
-    } else if (password.length < 8) {
-      alert('Error: Password must be at least 8 characters');
-    } else {
-      checkUserInDatabase();
-
-      // TODO: change this to Home Page
-      navigation.navigate('Home', {
-        user: username,
-      });
-    }
+    // TODO: change this to Home Page
+    navigation.navigate('Browse Events', {
+    user: username,
+    });
+    
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.spacer}></View>
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to CommunityMap!</Text>
-        <Text style={styles.directions}>Username:</Text>
-        <TextInput
-          style={styles.login}
-          onChangeText={setUsername}
-          value={username}
-        />
-        <Text style={styles.directions}>Password:</Text>
-        <TextInput
-          style={styles.login}
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          value={password}
-        />
+        <Text style={styles.title}>
+            Welcome to CommunityMap!
+        </Text>
         <TouchableOpacity
-          title="loginBtn"
-          style={styles.loginBtn}
-          onPress={(e) => handleLogin(e)}
+          title="browse events button"
+          style={styles.btn}
+          onPress={(e) => handleEvents(e)}
         >
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>View Events</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
@@ -103,7 +81,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 220,
   },
-  loginBtn: {
+  btn: {
     backgroundColor: '#7C58E4',
     width: 150,
     height: 40,

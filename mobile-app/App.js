@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './LoginScreen';
 //import HomeScreen from './HomeScreen';
 import BrowseEventsScreen from './BrowseEventsScreen';
+import HomeScreen from './HomeScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -19,11 +20,11 @@ export default function App() {
           name="Login"
           component={LoginScreen}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{ headerStyle: { backgroundColor: '#32f497' } }}
           name="Home"
           component={HomeScreen}
-        /> */}
+        />
         <Stack.Screen
           options={{ headerStyle: { backgroundColor: '#32f497' } }}
           name="Browse Events"
