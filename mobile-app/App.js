@@ -7,8 +7,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './LoginScreen';
 //import HomeScreen from './HomeScreen';
 import BrowseEventsScreen from './BrowseEventsScreen';
-import HomeScreen from './HomeScreen'
-import MapScreen from './MapScreen'
+import HomeScreen from './HomeScreen';
+import MapScreen from './MapScreen';
+import AddEventScreen from './AddEventScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,11 @@ export default function App() {
           options={{ headerStyle: { backgroundColor: '#32f497' } }}
           name="Map view"
           component={MapScreen}
+        />
+        <Stack.Screen
+          options={{ headerStyle: { backgroundColor: '#32f497' } }}
+          name="Add Community Event"
+          component={AddEventScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

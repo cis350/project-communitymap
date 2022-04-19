@@ -1,72 +1,60 @@
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 
-function HomeScreen({ route, navigation }) {
 
-    const username = route.params;
-  
-  function handleEvents(e) {
 
-    // TODO: change this to Home Page
-    navigation.navigate('Browse Events', {
-    user: username,
-    });
-    
-  }
 
-  function handleMap(e) {
+function AddEventScreen({ navigation }) {
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
-    // TODO: change this to Home Page
-    navigation.navigate('Map view', {
-    user: username,
-    });
-    
-  }
-  function handleAddEvents(e) {
+  async function addEventToDatabase() {}
 
-    // TODO: change this to Home Page
-    navigation.navigate('Add Community Event', {
-    user: username,
-    });
-    
+  function handleSubmit(e){
+    if (title.length == 0){
+      alert('Error: Event title required');
+    } else if (description.length == 0) {
+      alert('Error: Event description required');
+    } else {
+      addEventToDatabase();
+      alert('Event Added!');
+    }
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.spacer}></View>
       <View style={styles.content}>
-        <Text style={styles.title}>
-            Welcome to CommunityMap!
-        </Text>
+        <Text style={styles.title}>Enter your event's information</Text>
+        <Text style={styles.directions}>Enter event title:</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value)=>setTitle(value)}
+        />
+        <Text style={styles.directions}>Enter event description:</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value)=>setDescription(value)}
+        />
+        <Text style={styles.directions}>Enter event image url:</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value)=>setImageUrl(value)}
+        />
         <TouchableOpacity
-          title="browse events button"
-          style={styles.btn}
-          onPress={(e) => handleEvents(e)}
+          title="submitEventBtn"
+          style={styles.loginBtn}
+          onPress={(e) => handleSubmit(e)}
         >
-          <Text style={styles.loginText}>Browse Events</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          title="map button"
-          style={styles.btn}
-          onPress={(e) => handleMap(e)}
-        >
-          <Text style={styles.loginText}>View Map</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          title="add event button"
-          style={styles.btn}
-          onPress={(e) => handleAddEvents(e)}
-        >
-          <Text style={styles.loginText}>Add Event</Text>
+          <Text style={styles.loginText}>Submit</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
@@ -75,7 +63,8 @@ function HomeScreen({ route, navigation }) {
     </View>
   );
 }
-export default HomeScreen;
+
+export default AddEventScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -114,9 +103,9 @@ const styles = StyleSheet.create({
   },
   spacer: {
     width: 10,
-    height: 220,
+    height: 180,
   },
-  btn: {
+  loginBtn: {
     backgroundColor: '#7C58E4',
     width: 150,
     height: 40,
@@ -126,7 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#7C58E4',
-    marginVertical: 8,
   },
   loginText: {
     color: '#FFFFFF',
