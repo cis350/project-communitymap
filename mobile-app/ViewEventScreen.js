@@ -7,51 +7,24 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
 
-function MapScreen({ route, navigation }) {
-
-    const username = route.params;
-
-    const events_coords = [{          
-        latitude: 39.9656,          
-        longitude: -75.1810}];
-
-    function markerClick() {
-      navigation.navigate('View Event', {
-        title: 'name of event',
-        date: '5/12/22',
-        description: 'fun event'
-        });
-    }
+function ViewEvent({ route, navigation }) {
+  event_info = route.params;
 
   return (
-        <MapView        
-          style={{flex: 1}}        
-          region={{          
-            latitude: 39.9522,          
-            longitude: -75.1932,          
-            latitudeDelta: 0.1,          
-            longitudeDelta: 0.1 }}        
-          showsUserLocation={true}
-        >
-          <Marker 
-            coordinate={events_coords[0]}
-            title={'title'}
-            description={'description'}
-            onCalloutPress={markerClick}>
-            <Callout>
-              <View>
-                <Text>This is a plain view</Text>
-              </View>
-            </Callout>
-          </Marker>
-        </MapView> 
-      
-    
+    <View style={styles.container}>
+      <View style={styles.spacer}></View>
+      <View style={styles.content}>
+        <Text style={styles.title}> {event_info.title} </Text>
+        <Text style={styles.directions}> {event_info.date} </Text>
+        <Text style={styles.directions}> {event_info.description} </Text>
+      </View>
+      <View style={styles.spacer}></View>
+    </View>
   );
+
 }
-export default MapScreen;
+export default ViewEvent;
 
 const styles = StyleSheet.create({
   container: {
@@ -92,7 +65,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 220,
   },
-  btn: {
+  loginBtn: {
     backgroundColor: '#7C58E4',
     width: 150,
     height: 40,
@@ -102,10 +75,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#7C58E4',
-    marginVertical: 8,
   },
   loginText: {
     color: '#FFFFFF',
   },
 });
-
