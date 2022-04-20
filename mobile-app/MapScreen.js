@@ -13,9 +13,16 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 function MapScreen({ route, navigation }) {
   const username = route.params;
 
+  // async function getOpenEvents() {}
+  // async function getMyEvents() {}
+
+  // useEffect(() => {
+  //   my_events_coords = getMyEvents();
+  //   open_events_coords = getOpenEvents();
+  // });
+
   const my_events_coords = [
     {
-      id: 10,
       name: 'event1',
       coords: {
         latitude: 39.966333,
@@ -23,7 +30,6 @@ function MapScreen({ route, navigation }) {
       },
     },
     {
-      id: 11,
       name: 'event1',
       coords: {
         latitude: 39.951641,
@@ -34,7 +40,6 @@ function MapScreen({ route, navigation }) {
 
   const open_events_coords = [
     {
-      id: 12,
       name: 'event2',
       coords: {
         latitude: 39.9656,
@@ -63,9 +68,9 @@ function MapScreen({ route, navigation }) {
         }}
         showsUserLocation={true}
       >
-        {open_events_coords.map((marker) => (
+        {open_events_coords.map((marker, index) => (
           <Marker
-            key={marker.id}
+            key={index}
             coordinate={marker.coords}
             title={marker.name}
             description={'description'}
@@ -79,9 +84,9 @@ function MapScreen({ route, navigation }) {
             </Callout>
           </Marker>
         ))}
-        {my_events_coords.map((marker) => (
+        {my_events_coords.map((marker, index) => (
           <Marker
-            key={marker.id}
+            key={index}
             coordinate={marker.coords}
             title={marker.name}
             description={'description'}
