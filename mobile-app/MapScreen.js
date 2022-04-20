@@ -13,10 +13,33 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 function MapScreen({ route, navigation }) {
   const username = route.params;
 
-  const events_coords = [
+  const my_events_coords = [
     {
-      latitude: 39.9656,
-      longitude: -75.181,
+      id: 10,
+      name: 'event1',
+      coords: {
+        latitude: 39.966333,
+        longitude: -75.197123,
+      },
+    },
+    {
+      id: 11,
+      name: 'event1',
+      coords: {
+        latitude: 39.951641,
+        longitude: -75.152672,
+      },
+    },
+  ];
+
+  const open_events_coords = [
+    {
+      id: 12,
+      name: 'event2',
+      coords: {
+        latitude: 39.9656,
+        longitude: -75.181,
+      },
     },
   ];
 
@@ -29,29 +52,51 @@ function MapScreen({ route, navigation }) {
   }
 
   return (
-    <MapView
-      style={{ flex: 1 }}
-      region={{
-        latitude: 39.9522,
-        longitude: -75.1932,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1,
-      }}
-      showsUserLocation={true}
-    >
-      <Marker
-        coordinate={events_coords[0]}
-        title={'title'}
-        description={'description'}
-        onCalloutPress={markerClick}
+    <View style={styles.container}>
+      <MapView
+        style={{ flex: 1 }}
+        region={{
+          latitude: 39.9522,
+          longitude: -75.1932,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+        }}
+        showsUserLocation={true}
       >
-        <Callout>
-          <View>
-            <Text>This is a plain view</Text>
-          </View>
-        </Callout>
-      </Marker>
-    </MapView>
+        {open_events_coords.map((marker) => (
+          <Marker
+            key={marker.id}
+            coordinate={marker.coords}
+            title={marker.name}
+            description={'description'}
+            onCalloutPress={markerClick}
+            pinColor={'red'}
+          >
+            <Callout>
+              <View>
+                <Text>This is a currently open event</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
+        {my_events_coords.map((marker) => (
+          <Marker
+            key={marker.id}
+            coordinate={marker.coords}
+            title={marker.name}
+            description={'description'}
+            onCalloutPress={markerClick}
+            pinColor={'purple'}
+          >
+            <Callout>
+              <View>
+                <Text>This is one of my events</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
+      </MapView>
+    </View>
   );
 }
 export default MapScreen;
@@ -59,9 +104,9 @@ export default MapScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //backgroundColor: '#fff',
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
   content: {
     alignItems: 'center',

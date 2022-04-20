@@ -5,11 +5,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-
-
-
 
 function AddEventScreen({ navigation }) {
   const [description, setDescription] = useState('');
@@ -18,8 +15,8 @@ function AddEventScreen({ navigation }) {
 
   async function addEventToDatabase() {}
 
-  function handleSubmit(e){
-    if (title.length == 0){
+  function handleSubmit(e) {
+    if (title.length == 0) {
       alert('Error: Event title required');
     } else if (description.length == 0) {
       alert('Error: Event description required');
@@ -37,17 +34,17 @@ function AddEventScreen({ navigation }) {
         <Text style={styles.directions}>Enter event title:</Text>
         <TextInput
           style={styles.login}
-          onChangeText={(value)=>setTitle(value)}
+          onChangeText={(value) => setTitle(value)}
         />
         <Text style={styles.directions}>Enter event description:</Text>
         <TextInput
           style={styles.login}
-          onChangeText={(value)=>setDescription(value)}
+          onChangeText={(value) => setDescription(value)}
         />
         <Text style={styles.directions}>Enter event image url:</Text>
         <TextInput
           style={styles.login}
-          onChangeText={(value)=>setImageUrl(value)}
+          onChangeText={(value) => setImageUrl(value)}
         />
         <TouchableOpacity
           title="submitEventBtn"
@@ -69,9 +66,9 @@ export default AddEventScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //backgroundColor: '#fff',
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
   content: {
     alignItems: 'center',
