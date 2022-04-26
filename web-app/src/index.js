@@ -10,6 +10,7 @@ import Community from './routes/Community'
 import Home from './routes/Home'
 import Events from './routes/Events'
 import Signup from './routes/Signup'
+import Account from './routes/Account'
 //import './styles.css';
 const locations = require('./users.json');
 
@@ -35,6 +36,7 @@ root.render(
       <Route path="home" element={<Home />} />
       <Route path="events" element={<Events />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="account" element={<Account />} />
     </Routes>
   </BrowserRouter>,
 );

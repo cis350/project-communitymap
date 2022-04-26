@@ -9,7 +9,7 @@ import {
 } from './modules/storage';
 
 
-function App() {
+function App({ navigation }) {
   const [username, setUsername] = useState("username");
   const [password, setPassword] = useState("password");
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,7 +18,10 @@ function App() {
   //move to the home page with a log in
   const handleLogin = (member) =>{ 
     let path = `/home`; 
-    navigate(path);
+    navigate(path, {
+      itemId: 86,
+      otherParam: 'anything you want here',
+    });
   }
 
   function handleStart() {
@@ -49,16 +52,17 @@ function App() {
             paddingBottom: "1rem",
           }}
         >
-          <Link to="/home">Home</Link> |{" "}
+          <Link to="/home" state={{ from: "occupation" }}>Home</Link> |{" "}
           <Link to="/events">Events</Link> |{" "}
           <Link to="/community">Community</Link> |{" "}
-          <Link to="/map">Map</Link>
+          <Link to="/map">Map</Link> |{" "}
+          <Link to="/account">Account</Link>
         </nav>
         <Outlet />
       </div>
       <div className='center'>
         <h2>Welcome!</h2>
-        <form>
+        <form >
           <div>
             <input
               type="text" 
@@ -68,7 +72,7 @@ function App() {
           </div>
           <div>
             <input
-              type="text" 
+              type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

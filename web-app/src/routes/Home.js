@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import '../App.css'
 
-export default function Home({ communityMember }) {
+export default function Home({ route, navigation }) {
   // if user signed in
   function handleAccountPage() {
-    console.log(communityMember);
+    console.log(route);
   }
+
   return (
     <main style={{ padding: "1rem 0" }}>
         <nav className="navBar"
@@ -17,8 +18,8 @@ export default function Home({ communityMember }) {
         <Link to="/home">Home</Link> |{" "}
         <Link to="/events">Events</Link> |{" "}
         <Link to="/community">Community</Link> |{" "}
-        <Link to="/map">Map</Link>
-        <button type="logIn" onClick={handleAccountPage}> hello </button>
+        <Link to="/map">Map</Link> |{" "}
+        <Link to="/account">Account</Link>
       </nav>
       <h2>Welcome back User!</h2>   
       <div className="flex-container">

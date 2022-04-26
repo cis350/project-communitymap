@@ -4,7 +4,7 @@ import '../App.css'
 export default function Map() {
     return (
       <main style={{ padding: "1rem 0" }}>
-        <nav class="navBar"
+        <nav className="navBar"
           style={{
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
@@ -13,7 +13,8 @@ export default function Map() {
           <Link to="/home">Home</Link> |{" "}
           <Link to="/events">Events</Link> |{" "}
           <Link to="/community">Community</Link> |{" "}
-          <Link to="/map">Map</Link>
+          <Link to="/map">Map</Link> |{" "}
+          <Link to="/account">Account</Link>
         </nav>
         <h2>Map</h2>
       </main>

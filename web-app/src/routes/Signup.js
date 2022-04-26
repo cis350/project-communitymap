@@ -13,7 +13,6 @@ export default function Signup() {
   const [email, setEmail] = useState("email");
   const [errorMessage, setErrorMessage] = useState('');
 
-
   let navigate = useNavigate(); 
   const handleLogin = () =>{ 
     let path = `/`; 
@@ -50,6 +49,7 @@ export default function Signup() {
         <Link to="/events">Events</Link> |{" "}
         <Link to="/community">Community</Link> |{" "}
         <Link to="/map">Map</Link>
+        
       </nav>
       <div className='center'>
         <h2>Signup!</h2>
@@ -63,14 +63,14 @@ export default function Signup() {
           </div>
           <div>
             <input
-              type="text" 
+              type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div>
             <input
-              type="text" 
+              type="password" 
               value={re_password}
               onChange={(e) => setRePassword(e.target.value)}
             />
