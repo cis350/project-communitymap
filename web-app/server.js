@@ -30,7 +30,9 @@ webapp.post('/accounts', async (_req, resp) => {
     resp.status(409).json({ error: 'account already exists' });
   } else {
     try {
-      await lib.addUser(db, { username: _req.body.username, email: _req.body.email, phone: _req.body.phone, password: _req.body.password, neighborhood: _req.body.neighborhood});
+      await lib.addUser(db, { username: _req.body.username, email: _req.body.email, 
+        phone: _req.body.phone, password: _req.body.password,
+         neighborhood: _req.body.neighborhood});
       resp.status(201).json({ message: 'account with id added' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });
@@ -72,7 +74,9 @@ webapp.post('/events', async (_req, resp) => {
     resp.status(409).json({ error: 'event already exists with same name' });
   } else {
     try {
-      await lib.addEvent(db, { name: _req.body.name, description: _req.body.description, date: _req.body.date, location: _req.body.location, imgURL: _req.body.imagURL, time: _req.body.time, creator: _req.body.creator });
+      await lib.addEvent(db, { name: _req.body.name, description: _req.body.description, 
+        date: _req.body.date, location: _req.body.location, imgURL: _req.body.imagURL, 
+        time: _req.body.time, creator: _req.body.creator });
       resp.status(201).json({ message: 'event with id added' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });
