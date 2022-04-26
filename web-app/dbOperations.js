@@ -29,7 +29,7 @@ const addUser = async (db, newUser) => {
 //delete account from the database
 const deleteUser = async (db, user) => {
     try{
-        const result = await db.collection('accounts').deleteOne({user});
+        const result = await db.collection('accounts').deleteOne({username: user.username});
         console.log(`deleted player with id: ${result.deletedId} and user info: ${user}`);
         return result;
     } catch(err){
@@ -41,7 +41,7 @@ const deleteUser = async (db, user) => {
 //get a users account from the database
 async function getUser(db, user){
     try {
-        const results = await db.collection('account').find(user);
+        const results = await db.collection('accounts').find({ username: user.username });
         return results;
     } catch (e) {
         return null;
@@ -49,10 +49,10 @@ async function getUser(db, user){
 }
 
 //update neighborhood
-const updateNeighborhood = async (db, user, neighbood) => {
+const updateNeighborhood = async (db, user) => {
     try{
-        const result = await db.collection('account').updateOne({phoneNumber: user.phoneNumber},{$set:{neighborhood: neighbood}});
-        console.log(`changed user: ${user.phoneNumber} neighborhood to ${neighbood}`);
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{neighborhood: user.neighbood}});
+        console.log(`updated neighborhood`);
         return result;
     } catch(err){
         console.error(err);
@@ -61,10 +61,34 @@ const updateNeighborhood = async (db, user, neighbood) => {
 }
 
 //update email
-const updateEmail = async (db, user, email) => {
+const updateEmail = async (db, user) => {
     try{
-        const result = await db.collection('account').updateOne({phoneNumber: user.phoneNumber},{$set:{email: email}});
-        console.log(`changed user: ${user.phoneNumber} email to ${email}`);
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{email: user.email}});
+        console.log(`updated email`);
+        return result;
+    } catch(err){
+        console.error(err);
+        throw new Error('could not update email');
+    }
+}
+
+//update phone
+const updatePhone = async (db, user) => {
+    try{
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{phone: user.phone}});
+        console.log(`updated phone`);
+        return result;
+    } catch(err){
+        console.error(err);
+        throw new Error('could not update email');
+    }
+}
+
+//update password
+const updatePassword = async (db, user) => {
+    try{
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{password: user.password}});
+        console.log(`updated password`);
         return result;
     } catch(err){
         console.error(err);
@@ -85,10 +109,10 @@ const addEvent = async (db, newEvent) => {
 }
 
 //delete event from the database
-const deleteEvent = async (db, eventID) => {
+const deleteEvent = async (db, name) => {
     try{
-        const result = await db.collection('events').deleteOne({eventID});
-        console.log(`deleted player with id: ${result.deletedId} and user info: ${eventID}`);
+        const result = await db.collection('events').deleteOne({name: name});
+        console.log(`deleted event`);
         return result;
     } catch(err){
         console.error(err);
@@ -102,15 +126,15 @@ async function getAllEvents(db){
         const results = await db.collection('events').find({}).toArray();
         return results;
     } catch (error) {
-        console.error(err);
+        console.error(error);
         throw new Error('could not get all events from database');
     }
 }
 
 //get event from the database
-async function getEvent(db, eventID){
+async function getEvent(db, name){
     try {
-        const results = await db.collection('events').find(eventID);
+        const results = await db.collection('events').find({name: name});
         return results;
     } catch (e) {
         return null;
@@ -118,10 +142,10 @@ async function getEvent(db, eventID){
 }
 
 //update event date
-const updateDate = async (db, eventID, date) => {
+const updateDate = async (db, event) => {
     try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{date: date}});
-        console.log(`changed event: ${eventID} date to ${date}`);
+        const result = await db.collection('events').updateOne({name: event.name},{$set:{date: event.date}});
+        console.log(`updated event date`);
         return result;
     } catch(err){
         console.error(err);
@@ -130,10 +154,10 @@ const updateDate = async (db, eventID, date) => {
 }
 
 //update event time
-const updateTime = async (db, eventID, time) => {
+const updateTime = async (db, event) => {
     try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{time: time}});
-        console.log(`changed event: ${eventID} time to ${time}`);
+        const result = await db.collection('events').updateOne({name: event.name},{$set:{time: event.time}});
+        console.log(`updated event time`);
         return result;
     } catch(err){
         console.error(err);
@@ -142,10 +166,10 @@ const updateTime = async (db, eventID, time) => {
 }
 
 //update event location
-const updateLocation = async (db, eventID, location) => {
+const updateLocation = async (db, event) => {
     try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{location: location}});
-        console.log(`changed event: ${eventID} location to ${location}`);
+        const result = await db.collection('events').updateOne({name: event.name},{$set:{location: event.location}});
+        console.log(`updated event location`);
         return result;
     } catch(err){
         console.error(err);
@@ -153,45 +177,33 @@ const updateLocation = async (db, eventID, location) => {
     }
 }
 
-//update event host
-const updateHost = async (db, eventID, hostID) => {
-    try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{host: hostID}});
-        console.log(`changed event: ${eventID} host user to ${hostID}`);
-        return result;
-    } catch(err){
-        console.error(err);
-        throw new Error('could not update host user of event');
-    }
-}
-
-//update invited users
-const updateInvitedUsers = async (db, eventID, invitedUsers) => {
-    try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{invitedUsers: invitedUsers}});
-        console.log(`changed event: ${eventID} invited users to ${invitedUsers}`);
-        return result;
-    } catch(err){
-        console.error(err);
-        throw new Error('could not update invited users of event');
-    }
-}
-
 //update event description
-const updateDescription = async (db, eventID, description) => {
+const updateDescription = async (db, event) => {
     try{
-        const result = await db.collection('events').updateOne({eventID: eventID},{$set:{description: description}});
-        console.log(`changed event: ${eventID} description to ${description}`);
+        const result = await db.collection('events').updateOne({name: event.name},{$set:{description: event.description}});
+        console.log(`changed event description`);
         return result;
     } catch(err){
         console.error(err);
-        throw new Error('could not update teh description of the event');
+        throw new Error('could not update the description of the event');
     }
 }
 
-module.exports = {connect,addUser, deleteUser, getUser, deleteEvent, 
-    addEvent, getAllEvents, getEvent, updateDate, updateEmail, updateHost, 
-    updateDescription, updateLocation, updateInvitedUsers, updateTime, updateNeighborhood};
+//update event image
+const updateImgURL = async (db, event) => {
+    try{
+        const result = await db.collection('events').updateOne({name: event.name},{$set:{imgURL: event.imgURL}});
+        console.log(`changed event img`);
+        return result;
+    } catch(err){
+        console.error(err);
+        throw new Error('could not update the image of the event');
+    }
+}
+
+module.exports = {connect,addUser, deleteUser, getUser, deleteEvent, updatePhone, updateEmail,
+    addEvent, getAllEvents, getEvent, updateDate, updatePassword, updateImgURL,
+    updateDescription, updateLocation, updateTime, updateNeighborhood};
 
 
 
