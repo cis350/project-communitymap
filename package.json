@@ -1,0 +1,32 @@
+{
+  "name": "project-communitymap",
+  "version": "1.0.0",
+  "description": "a chat room with live updates",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cis350/project-communitymap.git"
+  },
+  "keywords": [
+    "JWT",
+    "live",
+    "updates",
+    "server",
+    "push",
+    "websocket"
+  ],
+  "author": "CIS350",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cis350/project-communitymap/issues"
+  },
+  "homepage": "https://github.com/cis350/project-communitymap#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
