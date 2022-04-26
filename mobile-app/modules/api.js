@@ -2,8 +2,13 @@ import axios from 'axios';
 
 const domain = 'http://localhost:8080';
 
-export const addEvent = async (title, date, location, description, imageUrl) => {
-    const response = await axios.post(`${domain}/events`)
+export const addEvent = async (title, date, location, description, imageURL, creator) => {
+    const response = await axios.post(`${domain}/events`, {name: title, 
+                                                            description: description, 
+                                                            date: date,
+                                                            location: location,
+                                                            imagURL: imageURL,
+                                                            creator: creator})
     return response.status;
 }
 
