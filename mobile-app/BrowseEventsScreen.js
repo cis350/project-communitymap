@@ -6,9 +6,14 @@ import {
   Pressable,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-function BrowseEventsScreen({ navigation }) {
+const api = require("./modules/api");
+
+
+function BrowseEventsScreen({ route, navigation }) {
+  
   let [EventList, setEventList] = useState([
     {
       description: 'description: this is the detailed description.',
@@ -105,30 +110,53 @@ function BrowseEventsScreen({ navigation }) {
 
   //The state will have to be collected from storage somehow, but for now this is dummy data
 
-  const CONTENT = [
-    {
-      id: '1',
-      customItem: (
-        <View style={styles.button}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
-              source={{
-                uri: 'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-              }}
-              style={styles.img}
-            />
-            <Text style={styles.eventTitle}>Event 1</Text>
-          </View>
-        </View>
-      ),
-    },
-  ];
+  // const CONTENT = [
+  //   {
+  //     id: '1',
+  //     customItem: (
+  //       <View style={styles.button}>
+  //         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+  //           <Image
+  //             source={{
+  //               uri: 'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
+  //             }}
+  //             style={styles.img}
+  //           />
+  //           <Text style={styles.eventTitle}>Event 1</Text>
+  //         </View>
+  //       </View>
+  //     ),
+  //   },
+  // ];
 
+  let {username} = route.params;
   const toggleCollapse = (i) => {
     var newList = { ...collapsedList };
     newList[i] = !newList[i];
     setCollapsedList(newList);
   };
+
+  const handleSignup = (e, item) => {
+    console.log(item);
+    api.signup(username, item.title);
+    alert("signed up for " + item.title);
+  };
+
+  const getEvents = async () => {
+    let eventlist = await api.getEventsList();
+    let newList = new Array(eventlist.length);
+    for (let i = 0; i < eventlist.length; i++){
+      eventlist[i].key = i;
+      newList[i] = true;
+    }
+    setCollapsedList(newList);
+    setEventList(eventlist);
+
+  };
+
+  useEffect(()=>{
+    getEvents();
+  });
 
   return (
     <View style={styles.container}>
@@ -146,8 +174,15 @@ function BrowseEventsScreen({ navigation }) {
                 <Text style={styles.eventTitle}>{item.title}</Text>
               </View>
               <Collapsible collapsed={collapsedList[item.key]} align="center">
-                <View>
-                  <Text>{item.description}</Text>
+                <View style = {{marginVertical: 10}}>
+                  <Text>Date: {item.date}{"\n"}
+                        Location: {item.locaiton}{"\n"}
+                        Description: {item.description}</Text>
+                </View>
+                <View style={{alignItems: 'center'}}>
+                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
+                    <Text>Sign up</Text>
+                  </TouchableOpacity>
                 </View>
               </Collapsible>
             </Pressable>
@@ -166,6 +201,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  signupButton: {
+    marginVertical: 10,
+    backgroundColor: '#32f497',
+    width: 120,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
+
   },
   button: {
     flex: 1,

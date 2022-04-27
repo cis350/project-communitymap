@@ -7,21 +7,28 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+const api = require("./modules/api");
 
 function AddEventScreen({ navigation }) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
+  const [location, setLocation] = useState('');
+  const [date, setDate] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-  async function addEventToDatabase() {}
+  
 
   function handleSubmit(e) {
     if (title.length == 0) {
       alert('Error: Event title required');
     } else if (description.length == 0) {
       alert('Error: Event description required');
+    } else if (date.length != 10) {
+      alert('Error: please enter dat in mm/dd/yyyy format');
+    } else if (location.length == 0) {
+      alert('Error: Event location required');
     } else {
-      addEventToDatabase();
+      api.addEvent(title, date, location, description, imageUrl);
       alert('Event Added!');
     }
   }
@@ -35,6 +42,16 @@ function AddEventScreen({ navigation }) {
         <TextInput
           style={styles.login}
           onChangeText={(value) => setTitle(value)}
+        />
+        <Text style={styles.directions}>Enter event date (mm/dd/yyyy):</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value) => setDate(value)}
+        />
+        <Text style={styles.directions}>Enter event location:</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value) => setLocation(value)}
         />
         <Text style={styles.directions}>Enter event description:</Text>
         <TextInput
@@ -93,6 +110,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 5,
     //paddingHorizontal: 120,
+    height: 30,
     width: 275,
     height: 400,
     borderRadius: 10,
