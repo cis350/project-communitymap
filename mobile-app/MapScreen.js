@@ -12,14 +12,14 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 
 function MapScreen({ route, navigation }) {
   const username = route.params;
+  let [eventList, setEventList] = useState([]);
 
   // async function getOpenEvents() {}
   // async function getMyEvents() {}
 
-  // useEffect(() => {
-  //   my_events_coords = getMyEvents();
-  //   open_events_coords = getOpenEvents();
-  // });
+  useEffect(() => {
+    getEvents();
+  });
 
   const my_events_coords = [
     {
@@ -38,15 +38,24 @@ function MapScreen({ route, navigation }) {
     },
   ];
 
-  const open_events_coords = [
-    {
-      name: 'event2',
-      coords: {
-        latitude: 39.9656,
-        longitude: -75.181,
-      },
-    },
-  ];
+  // const open_events_coords = [
+  //   {
+  //     name: 'event2',
+  //     coords: {
+  //       latitude: 39.9656,
+  //       longitude: -75.181,
+  //     },
+  //   },
+  // ];
+  const getEvents = async () => {
+    let eventlist = await api.getEventsList();
+    let newList = new Array(eventlist.length);
+    for (let i = 0; i < eventlist.length; i++) {
+      eventlist[i].key = i;
+      newList[i] = true;
+    }
+    setEventList(eventlist);
+  };
 
   function markerClick() {
     navigation.navigate('View Event', {
@@ -68,11 +77,11 @@ function MapScreen({ route, navigation }) {
         }}
         showsUserLocation={true}
       >
-        {open_events_coords.map((marker, index) => (
+        {eventList.map((event, index) => (
           <Marker
             key={index}
-            coordinate={marker.coords}
-            title={marker.name}
+            coordinate={event.location}
+            title={event.name}
             description={'description'}
             onCalloutPress={markerClick}
             pinColor={'red'}

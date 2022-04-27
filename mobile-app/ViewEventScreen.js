@@ -22,7 +22,6 @@ function ViewEvent({ route, navigation }) {
       <View style={styles.spacer}></View>
     </View>
   );
-
 }
 export default ViewEvent;
 

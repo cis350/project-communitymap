@@ -9,11 +9,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-const api = require("./modules/api");
-
+const api = require('./modules/api');
 
 function BrowseEventsScreen({ route, navigation }) {
-  
   let [EventList, setEventList] = useState([
     {
       description: 'description: this is the detailed description.',
@@ -129,7 +127,7 @@ function BrowseEventsScreen({ route, navigation }) {
   //   },
   // ];
 
-  let {username} = route.params;
+  let { username } = route.params;
   const toggleCollapse = (i) => {
     var newList = { ...collapsedList };
     newList[i] = !newList[i];
@@ -139,22 +137,21 @@ function BrowseEventsScreen({ route, navigation }) {
   const handleSignup = (e, item) => {
     console.log(item);
     api.signup(username, item.title);
-    alert("signed up for " + item.title);
+    alert('signed up for ' + item.title);
   };
 
   const getEvents = async () => {
     let eventlist = await api.getEventsList();
     let newList = new Array(eventlist.length);
-    for (let i = 0; i < eventlist.length; i++){
+    for (let i = 0; i < eventlist.length; i++) {
       eventlist[i].key = i;
       newList[i] = true;
     }
     setCollapsedList(newList);
     setEventList(eventlist);
-
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getEvents();
   });
 
@@ -174,13 +171,20 @@ function BrowseEventsScreen({ route, navigation }) {
                 <Text style={styles.eventTitle}>{item.title}</Text>
               </View>
               <Collapsible collapsed={collapsedList[item.key]} align="center">
-                <View style = {{marginVertical: 10}}>
-                  <Text>Date: {item.date}{"\n"}
-                        Location: {item.locaiton}{"\n"}
-                        Description: {item.description}</Text>
+                <View style={{ marginVertical: 10 }}>
+                  <Text>
+                    Date: {item.date}
+                    {'\n'}
+                    Location: {item.locaiton}
+                    {'\n'}
+                    Description: {item.description}
+                  </Text>
                 </View>
-                <View style={{alignItems: 'center'}}>
-                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
+                <View style={{ alignItems: 'center' }}>
+                  <TouchableOpacity
+                    style={styles.signupButton}
+                    onPress={(e) => handleSignup(e, item)}
+                  >
                     <Text>Sign up</Text>
                   </TouchableOpacity>
                 </View>
@@ -208,8 +212,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 30,
     alignItems: 'center',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
   },
   button: {
     flex: 1,
