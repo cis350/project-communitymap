@@ -107,12 +107,9 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     //paddingHorizontal: 120,
     width: 275,
-<<<<<<< HEAD
-    height: 30,
-=======
+
     height: 400,
     borderRadius: 10,
->>>>>>> e3ec134cf6685bcdb1bdab068fbe1b68d76fa121
   },
   directions: {
     fontSize: 18,
