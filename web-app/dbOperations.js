@@ -210,13 +210,13 @@ module.exports = {connect,addUser, deleteUser, getUser, deleteEvent, updatePhone
 
 
     
-const main = async () => {
-    let db = await connect('mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retryWrites=true&w=majority');
-    //await addUser(db, {username:'aria', password:'jack', email:'a@g.com', phone:'6313360246', neighbood:'ucity'});
-    //await deleteUser(db, {username:'aria'})
-    //await addEvent(db, {name:'birthday', location:'harnwell', description: 'fun', time:'today', date:'today', creator:'me', imgURL:'www.web'})
-    await getEvent(db, {name:'move'})
-}
+// const main = async () => {
+//     let db = await connect('mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retryWrites=true&w=majority');
+//     //await addUser(db, {username:'aria', password:'jack', email:'a@g.com', phone:'6313360246', neighbood:'ucity'});
+//     //await deleteUser(db, {username:'aria'})
+//     //await addEvent(db, {name:'birthday', location:'harnwell', description: 'fun', time:'today', date:'today', creator:'me', imgURL:'www.web'})
+//     await getEvent(db, {name:'move'})
+// }
 
-main();
+// main();
 
