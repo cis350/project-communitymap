@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     //paddingHorizontal: 120,
     width: 275,
-
     height: 400,
     borderRadius: 10,
   },
