@@ -9,48 +9,31 @@ import {
 } from 'react-native';
  
 
-function LoginScreen({ navigation }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  async function checkUserInDatabase() {} // TODO: find/create user from database once backend is setup
+function StartupScreen({ navigation }) {
 
   function handleLogin(e) {
-    if (!username.match('^[a-zA-Z0-9]*$') || username.length < 3) {
-      alert('Error: Invalid username');
-    } else if (password.length < 8) {
-      alert('Error: Password must be at least 8 characters');
-    } else {
-      checkUserInDatabase();
+    navigation.navigate('Login');
+  }
 
-      // TODO: change this to Home Page
-      navigation.navigate('Home', {
-        username: username,
-      });
-    }
+  function handleRegister(e) {
+    navigation.navigate('Register');
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.spacer_top}></View>
       <View style={styles.content}>
-        <Text style={styles.title}>CommunityMap</Text>
-        <Text style={styles.directions}>Username:</Text>
-        <TextInput
-          style={styles.login}
-          onChangeText={setUsername}
-          value={username}
-        />
-        <Text style={styles.directions}>Password:</Text>
-        <TextInput
-          style={styles.login}
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          value={password}
-        />
+        <Text style={styles.title}>CommunityMap</Text>        
         <TouchableOpacity
-          title="loginBtn"
-          style={styles.loginBtn}
+          title="create"
+          style={styles.button}
+          onPress={(e) => handleRegister(e)}
+        >
+          <Text style={styles.loginText}>Register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          title="login"
+          style={styles.button}
           onPress={(e) => handleLogin(e)}
         >
           <Text style={styles.loginText}>Login</Text>
@@ -62,7 +45,7 @@ function LoginScreen({ navigation }) {
     </View>
   );
 }
-export default LoginScreen;
+export default StartupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +63,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   title: {
-    fontSize: 30,
+    fontSize: 36,
     marginVertical: 15,
     fontWeight: 'bold',
     marginBottom: 60,
@@ -90,16 +73,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'rgba(196,196,196,0.5)',
-    marginBottom: 30,
-    marginTop: 5,
+    marginVertical: 30,
     //paddingHorizontal: 120,
     width: 275,
     height: 400,
     borderRadius: 10,
-    fontSize: 20
   },
   directions: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'left',
     alignSelf: 'flex-start',
@@ -111,21 +92,23 @@ const styles = StyleSheet.create({
   },
   spacer_bot: {
     width: 10,
-    height: 250,
+    height: 200,
     backgroundColor: '#5e6475'
   },
-  loginBtn: {
+  button: {
     backgroundColor: '#7C58E4',
-    width: 150,
-    height: 40,
+    width: 250,
+    height: 60,
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#7C58E4',
+    marginVertical: 15,
   },
   loginText: {
     color: '#FFFFFF',
+    fontSize: 18,
   },
 });

@@ -38,9 +38,9 @@ function AddEventScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.spacer}></View>
+      <View style={styles.spacer_top}></View>
       <View style={styles.content}>
-        <Text style={styles.title}>Enter your event's information</Text>
+        <Text style={styles.title}>Enter your event's {'\n'} information</Text>
         <Text style={styles.directions}>Enter event title:</Text>
         <TextInput
           style={styles.login}
@@ -73,7 +73,7 @@ function AddEventScreen({ navigation, route }) {
         />
         <TouchableOpacity
           title="submitEventBtn"
-          style={styles.loginBtn}
+          style={styles.button}
           onPress={(e) => handleSubmit(e)}
         >
           <Text style={styles.loginText}>Submit</Text>
@@ -81,7 +81,7 @@ function AddEventScreen({ navigation, route }) {
 
         <StatusBar style="auto" />
       </View>
-      <View style={styles.spacer}></View>
+      <View style={styles.spacer_bot}></View>
     </View>
   );
 }
@@ -91,15 +91,15 @@ export default AddEventScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
+    backgroundColor: '#5e6475',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   content: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgba(196,196,196,0.5)',
+    backgroundColor: '#5e6475',
     padding: 10,
     marginVertical: 10,
   },
@@ -107,30 +107,41 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginVertical: 15,
     fontWeight: 'bold',
-    marginBottom: 60,
+    marginBottom: 30,
+    color: '#fff',
+    textAlign: 'center'
   },
   login: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'rgba(196,196,196,0.5)',
-    marginVertical: 10,
+    marginBottom: 20,
+    marginTop: 5,
     //paddingHorizontal: 120,
     height: 30,
     width: 275,
+    height: 400,
+    borderRadius: 10,
   },
   directions: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'left',
     alignSelf: 'flex-start',
   },
-  spacer: {
+  spacer_top: {
     width: 10,
-    height: 150,
+    height: 50,
+    backgroundColor: '#5e6475'
   },
-  loginBtn: {
+  spacer_bot: {
+    width: 10,
+    height: 140,
+    backgroundColor: '#5e6475'
+  },
+  button: {
     backgroundColor: '#7C58E4',
-    width: 150,
+    width: 175,
     height: 40,
     justifyContent: 'center',
     flexDirection: 'row',
@@ -138,8 +149,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#7C58E4',
+    marginVertical: 15,
   },
   loginText: {
     color: '#FFFFFF',
+    fontSize: 18,
   },
 });
