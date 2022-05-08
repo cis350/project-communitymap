@@ -29,7 +29,8 @@ function App({ navigation }) {
       setErrorMessage('');
       //gets the message from local storage
       const member = getCommunityMember(username, password); 
-      console.log(member); 
+      console.log(member.username);
+      localStorage.setItem('currentUser', member.username); 
       handleLogin(member); 
     } catch(e) {
       console.log(e.message);
@@ -46,7 +47,7 @@ function App({ navigation }) {
   return (
     <div className="App">
       <div>
-        <nav className="navBar"
+        {/* <nav className="navBar"
           style={{
             borderBottom: "solid 1px",
             paddingBottom: "1rem",
@@ -57,7 +58,7 @@ function App({ navigation }) {
           <Link to="/community">Community</Link> |{" "}
           <Link to="/map">Map</Link> |{" "}
           <Link to="/account">Account</Link>
-        </nav>
+        </nav> */}
         <Outlet />
       </div>
       <div className='center'>

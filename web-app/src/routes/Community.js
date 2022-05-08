@@ -1,17 +1,62 @@
 import { Link } from "react-router-dom";
-import {useRef} from "react"
+import {useRef, useEffect, useState} from "react"
 import '../App.css'
-import {joinChat} from '../modules/api.js'
+import {
+  joinChat, 
+  verifySession,
+  getUsers,
+  sendMessage,
+  getMessages, 
+} from '../modules/api.js'
 
 export default function Community() {
-  let username = useRef(''); 
+  let username = useRef(localStorage.getItem('currentUser')); 
+  let chatUsers = useRef([]); 
+  const [numUsers, setNumUsers] = useState(0);
+  const [messages, setMessages] = useState([]);
+
+  // fetch the list of connected users inside useEffect
+  useEffect(() =>{
+    async function fetchUsers(){
+      chatUsers.current = await getUsers();
+      // update the state 
+      setNumUsers(chatUsers.current.length);
+      console.log('users', chatUsers.current);
+    }
+    async function fetchMessages() {
+      const mesgs = await getMessages(); 
+      setMessages(mesgs); 
+    }
+
+    // we want to fetch the users frequently (5 s)
+    //we will use server polling with setInterval
+    setInterval(() => {
+      fetchUsers()
+      fetchMessages();
+    }, 5000);
+    //fetchUsers();
+  },[numUsers, messages]);
+
+
+
   async function authenticate(e) {
     e.preventDefault(); 
     console.log(username.current); 
-    const token = await joinChat(username.current); 
-    //store token inside session storage
-    sessionStorage.setItem('token', token); 
-
+    if(sessionStorage.getItem('token') === null) {
+      const token = await joinChat(username.current); 
+      //store token inside session storage
+      sessionStorage.setItem('token', token); 
+    } else {
+      const token = sessionStorage.getItem('token'); 
+      const code = await verifySession(token); 
+      console.log(code);
+      if(code === 200) {
+        console.log('session valid');
+      }
+      if(code === 302) {
+        console.log('session expired'); 
+      }
+    }
   }
   return (
     <main style={{ padding: "1rem 0" }}>
@@ -29,10 +74,45 @@ export default function Community() {
       </nav>
       <h2>Community</h2>
       <div>
-        <label>Enter your username</label>
-        <input type="text" onChange={(e) => username.current = e.target.value}/> 
         <button type="button" onClick={(e) => authenticate(e)}>Join the Chat </button>
+        <hr />
+        <ConnectedUsers users={chatUsers.current}/>
+        <MessagesCommponent user={username.current} messages={messages}/>
       </div>
     </main>
+  );
+}
+
+function ConnectedUsers(props) {
+  return(
+    <div>
+      <h2>Connected Users</h2>
+      <div>
+        <ul>{props.users.map(user => <li key={user}>{user}</li>)}</ul>
+      </div>
+    </div>
+  );
+}
+
+function MessagesCommponent(props) {
+  let reciever = useRef(''); 
+  let content = useRef(''); 
+  const sendMsg = async(e) => {
+    e.preventDefault(); 
+    await sendMessage(props.user, reciever.current, content.current)
+  };
+
+  return(
+    <div>
+      <div>
+        <h2>Previous Messages</h2>
+        <div>{props.messages.map( msg => <p>{JSON.stringify(msg)}</p>)}</div>
+        <hr/>
+      </div>
+      <h2>New Messages</h2>
+      <label>To: </label> <input type='text' onChange={(e) => reciever.current = e.target.value}/>
+      <textarea cols="15" rows={5} onChange={(e) => content.current = e.target.value}/>
+      <button type='button' onClick={(e) => sendMsg(e)}> Send </button>
+    </div>
   );
 }

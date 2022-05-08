@@ -5,13 +5,14 @@ import '../App.css'
 
 
 export default function AccountInfo() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('email@gmail.com');
+  const [name, setName] = useState(localStorage.getItem('currentUser'));
+  const [email, setEmail] = useState('e');
   const [password, setPassword] = useState('');
   const [re_password, setre_Password] = useState('');
+  
   // if user signed in
-  let testUser = 'userName'; 
-  let phone = 'phone'; 
+  let testUser = localStorage.getItem('currentUser'); 
+  let phone = '3036190189'; 
 
   function handleDelete() {
     //TO DO 
@@ -22,6 +23,9 @@ export default function AccountInfo() {
   function updatePassword() {
     //TO DO 
     //1. Make sure passwords match
+    if(password === re_password && password !== '') {
+      //Post
+    }
     //2. Send password to backend
     console.log("update the Password")
   }
@@ -30,11 +34,6 @@ export default function AccountInfo() {
     // TO DO
     // 1. Send new email to backend
     console.log('push new email to backend'); 
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(`Form submitted, ${name}`);    
   }
 
   return (
@@ -51,14 +50,14 @@ export default function AccountInfo() {
         <Link to="/map">Map</Link>
       </nav>
       <div className='center'>
-        <h2>Welcome {testUser}!</h2>
+        <h2>Welcome {name}!</h2>
         <div> 
           <div>Email: {email}</div>
-          <div>Phone Number: {3036190189}</div>
+          <div>Phone Number: {phone}</div>
           <div>
             <form>
               <div>
-                <input
+              <label>Email: </label><input
                   type="text" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -66,18 +65,16 @@ export default function AccountInfo() {
               </div>
             </form>
             <button onClick={updateEmail}>Change Email</button>
-
-
             <form>
               <div>
-                <input
+              <label>Password: </label><input
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div>
-                <input
+              <label>Re-Enter Password: </label><input
                   type="password" 
                   value={re_password}
                   onChange={(e) => setre_Password(e.target.value)}
