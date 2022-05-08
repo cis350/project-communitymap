@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 const api = require("./modules/api");
 
-function AddEventScreen({ navigation }) {
+function AddEventScreen({ navigation, route }) {
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [time, setTime] = useState('');
+  let username = route.params.username;
+  //console.log(username);
 
   
 
@@ -28,7 +31,7 @@ function AddEventScreen({ navigation }) {
     } else if (location.length == 0) {
       alert('Error: Event location required');
     } else {
-      api.addEvent(title, date, location, description, imageUrl);
+      api.addEvent(title, date, location, description, imageUrl, username, time);
       alert('Event Added!');
     }
   }
@@ -47,6 +50,11 @@ function AddEventScreen({ navigation }) {
         <TextInput
           style={styles.login}
           onChangeText={(value) => setDate(value)}
+        />
+        <Text style={styles.directions}>Enter event time:</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value) => setTime(value)}
         />
         <Text style={styles.directions}>Enter event location:</Text>
         <TextInput

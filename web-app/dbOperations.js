@@ -100,7 +100,7 @@ const updatePassword = async (db, user) => {
 const addEvent = async (db, newEvent) => {
     try{
         const result = await db.collection('events').insertOne(newEvent);
-        console.log(`added user with id: ${result.insertedId}`);
+        console.log(`added event with id: ${result.insertedId}`);
         return result;
     } catch(err){
         console.error(err);
@@ -134,7 +134,8 @@ async function getAllEvents(db){
 //get event from the database
 async function getEvent(db, name){
     try {
-        const results = await db.collection('events').find({name: name});
+        const results = await db.collection('events').find({name: name}).toArray();
+        console.log(results);
         return results;
     } catch (e) {
         return null;

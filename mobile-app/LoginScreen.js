@@ -25,7 +25,7 @@ function LoginScreen({ navigation }) {
 
       // TODO: change this to Home Page
       navigation.navigate('Home', {
-        user: username,
+        username: username,
       });
     }
   }

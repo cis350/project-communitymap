@@ -69,6 +69,7 @@ webapp.delete('/accounts', async (_req, resp) => {
 
 // 4. making an event endpoint
 webapp.post('/events', async (_req, resp) => {
+  console.log("event posted in db");
   //checks that events name is unique
   if ((await lib.getEvent(db, { name: _req.body.name })).length !== 0) {
     resp.status(409).json({ error: 'event already exists with same name' });

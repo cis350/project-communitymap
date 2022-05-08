@@ -10,13 +10,13 @@ import {
 
 function HomeScreen({ route, navigation }) {
 
-    const username = route.params;
+    const username = route.params.username;
   
   function handleEvents(e) {
 
     // TODO: change this to Home Page
     navigation.navigate('Browse Events', {
-    user: username,
+    username: username,
     });
     
   }
@@ -25,7 +25,7 @@ function HomeScreen({ route, navigation }) {
 
     // TODO: change this to Home Page
     navigation.navigate('Map view', {
-    user: username,
+    username: username,
     });
     
   }
@@ -33,7 +33,7 @@ function HomeScreen({ route, navigation }) {
 
     // TODO: change this to Home Page
     navigation.navigate('Add Community Event', {
-    user: username,
+    username: username,
     });
     
   }
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     //paddingHorizontal: 120,
     width: 275,
+    height: 30,
   },
   directions: {
     fontSize: 12,

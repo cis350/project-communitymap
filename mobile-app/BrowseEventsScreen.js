@@ -143,20 +143,39 @@ function BrowseEventsScreen({ route, navigation }) {
   };
 
   const getEvents = async () => {
-    let eventlist = await api.getEventsList();
+    let eventlistOrig = await api.getEventsList();
+    let eventlist = [...eventlistOrig.data];
+    console.log(eventlist);
     let newList = new Array(eventlist.length);
     for (let i = 0; i < eventlist.length; i++){
       eventlist[i].key = i;
+      if (eventlist[i].name === null){
+        eventlist[i].name = "";
+      }
+      if (eventlist[i].imgURL === null || eventlist[i].imgURL === ''){
+        eventlist[i].imgURL = 'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85';
+      }
+      if (eventlist[i].date === null){
+        eventlist[i].date = "";
+      }
+      if (eventlist[i].location === null){
+        eventlist[i].location = "";
+      }
+      if (eventlist[i].description === null){
+        eventlist[i].description = "";
+      }
       newList[i] = true;
     }
     setCollapsedList(newList);
     setEventList(eventlist);
+    console.log(eventlist);
+    //console.log(Eventlist);
 
   };
 
   useEffect(()=>{
     getEvents();
-  });
+  },[]);
 
   return (
     <View style={styles.container}>
@@ -170,20 +189,16 @@ function BrowseEventsScreen({ route, navigation }) {
               onPress={() => toggleCollapse(item.key)}
             >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={{ uri: item.image }} style={styles.img} />
-                <Text style={styles.eventTitle}>{item.title}</Text>
+                <Image source={{ uri: item.imgURL }} style={styles.img} />
+                <Text style={styles.eventTitle}>{item.name}</Text>
               </View>
               <Collapsible collapsed={collapsedList[item.key]} align="center">
                 <View style = {{marginVertical: 10}}>
                   <Text>Date: {item.date}{"\n"}
-                        Location: {item.locaiton}{"\n"}
+                        Location: {item.location}{"\n"}
                         Description: {item.description}</Text>
                 </View>
-                <View style={{alignItems: 'center'}}>
-                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
-                    <Text>Sign up</Text>
-                  </TouchableOpacity>
-                </View>
+                
               </Collapsible>
             </Pressable>
           )}
@@ -192,6 +207,13 @@ function BrowseEventsScreen({ route, navigation }) {
     </View>
   );
 }
+
+
+/*<View style={{alignItems: 'center'}}>
+                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
+                    <Text>Sign up</Text>
+                  </TouchableOpacity>
+                </View>*/
 
 export default BrowseEventsScreen;
 
