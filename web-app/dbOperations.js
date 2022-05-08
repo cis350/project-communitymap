@@ -14,6 +14,8 @@ const connect = async (url) => {
 }
 
 //---Operations for accounts---
+
+//user has attributes username, password, phone, email, neighborhood
 //add account to the dataBase
 const addUser = async (db, newUser) => {
     try{
@@ -100,7 +102,7 @@ const updatePassword = async (db, user) => {
 const addEvent = async (db, newEvent) => {
     try{
         const result = await db.collection('events').insertOne(newEvent);
-        console.log(`added user with id: ${result.insertedId}`);
+        console.log(`added event with id: ${result.insertedId}`);
         return result;
     } catch(err){
         console.error(err);
@@ -132,9 +134,9 @@ async function getAllEvents(db){
 }
 
 //get event from the database
-async function getEvent(db, name){
+async function getEvent(db, event){
     try {
-        const results = await db.collection('events').find({name: name});
+        const results = await db.collection('events').find({name: event.name}).toArray();
         return results;
     } catch (e) {
         return null;
@@ -208,9 +210,13 @@ module.exports = {connect,addUser, deleteUser, getUser, deleteEvent, updatePhone
 
 
     
-// const main = async () => {
-//     let db = await connect('mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retryWrites=true&w=majority');
-// }
+const main = async () => {
+    let db = await connect('mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retryWrites=true&w=majority');
+    //await addUser(db, {username:'aria', password:'jack', email:'a@g.com', phone:'6313360246', neighbood:'ucity'});
+    //await deleteUser(db, {username:'aria'})
+    //await addEvent(db, {name:'birthday', location:'harnwell', description: 'fun', time:'today', date:'today', creator:'me', imgURL:'www.web'})
+    await getEvent(db, {name:'move'})
+}
 
-// main();
+main();
 
