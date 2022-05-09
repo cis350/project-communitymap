@@ -212,18 +212,35 @@ webapp.post('/signup', async (_req, resp) => {
 });
 
 // 6. deleting an event 
-webapp.delete('/events', async (_req, resp) => {
-  //req should have name (name of event) and currentAccount (username of the current account)
-  if (!_req.body.name || _req.body.name.length === 0) {
+// webapp.delete('/events', async (_req, resp) => {
+//   //req should have name (name of event) and currentAccount (username of the current account)
+//   if (!_req.body.name || _req.body.name.length === 0) {
+//     resp.status(400).json({ error: 'bad input parameters' });
+//   } else if ((await lib.getEvent(db, { searchString: _req.body.name })).length === 0) {
+//     resp.status(409).json({ error: 'event does not exist' });
+//   } else if (_req.body.currentAccount !== (await lib.getEvent(db, { searchString: _req.body.name })).creator) {
+//     resp.status(409).json({ error: 'account not authorized' });
+//   } else {
+//     try {
+//       await lib.deleteEvent(db, _req.body.name);
+//       resp.status(200).json({ message: 'Event deleted' });
+//     } catch (error) {
+//       resp.status(500).json({ error: 'try again later' });
+//     }
+//   }
+// });
+
+// 3. deleting an account endpoint
+webapp.delete('/events/:name', async (_req, resp) => {
+  // req should include username of the account to delete
+  if (!_req.params.name || _req.params.name.length === 0) {
     resp.status(400).json({ error: 'bad input parameters' });
-  } else if ((await lib.getEvent(db, { searchString: _req.body.name })).length === 0) {
+  } else if ((await lib.getEvent(db, _req.params.name)).length === 0) {
     resp.status(409).json({ error: 'event does not exist' });
-  } else if (_req.body.currentAccount !== (await lib.getEvent(db, { searchString: _req.body.name })).creator) {
-    resp.status(409).json({ error: 'account not authorized' });
   } else {
     try {
-      await lib.deleteEvent(db, _req.body.name);
-      resp.status(200).json({ message: 'Event deleted' });
+      await lib.deleteEvent(db, _req.params.name);
+      resp.status(200).json({ message: 'event deleted' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });
     }

@@ -188,6 +188,19 @@ export const getMyEvents = async (name) => {
   }
 }
 
+
+//Delete
+export const deleteEvent = async (name) => {
+  try {
+    if(name.length > 0) {
+      const response = await axios.delete(`${domain}/events/${name}`); 
+      return response.status; 
+    }
+  } catch(err)  {
+    console.log(err);
+  }
+}
+
 export const getEventsList = async () => {
   try{
       const response = await axios.get(`${domain}/events`);

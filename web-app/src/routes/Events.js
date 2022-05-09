@@ -5,7 +5,8 @@ import {
   getMyEvents,
   getEventsList,
   signup,
-  addEvent
+  addEvent,
+  deleteEvent
 } from '../modules/api.js'
 
 export default function Events() {
@@ -135,14 +136,18 @@ export default function Events() {
 }
 
 function MyEvents(props) {
-  function deleteEvent(event) {
+  async function eventDelete(event) {
     console.log("delete event", event.name);
+    console.log(localStorage.getItem("currentUser"));
+    let status = await deleteEvent(event.name);
+    console.log(status);
+    
   }
   return(
     <div>
       <p>See Created Events Below. Click Event to Delete</p>
       <div className="scroll">
-        <ul>{props.events.data.map(event => <li key={event.name}><button type="button" onClick={(e) => deleteEvent(event)}>{event.name}</button></li>)}</ul>
+        <ul>{props.events.data.map(event => <li key={event.name}><button type="button" onClick={(e) => eventDelete(event)}>{event.name}</button></li>)}</ul>
       </div>
     </div>
   );

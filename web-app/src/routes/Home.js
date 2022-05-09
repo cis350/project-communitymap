@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import '../App.css'
 
 export default function Home({ route, navigation }) {
-  // if user signed in
-  function handleAccountPage() {
-    console.log(route);
-  }
+  // // if user signed in
+  // function handleAccountPage() {
+  //   console.log(route);
+  // }
 
   return (
     <main style={{ padding: "1rem 0" }}>
