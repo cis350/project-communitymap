@@ -98,12 +98,6 @@ webapp.post('/messages', ( req, resp ) => {
 
 });
 
-
-
-
-
-
-
 // Root endpoint
 webapp.get('/', (req, res) => {
   res.json({ message: 'root' });

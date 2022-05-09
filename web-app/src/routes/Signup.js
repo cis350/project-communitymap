@@ -25,15 +25,15 @@ export default function Signup() {
   function handleStart() {
     try {
       setErrorMessage(''); 
-      // const communityMember = {
-      //   username:username, 
-      //   password:password, 
-      //   re_password:re_password,
-      //   phone:phone, 
-      //   email:email,
-      // };
-      addUser(username, phone, email, password, re_password);
-      // addCommunityMember(communityMember); 
+      const communityMember = {
+        username:username, 
+        password:password, 
+        re_password:re_password,
+        phone:phone, 
+        email:email,
+      };
+      // addUser(username, phone, email, password, re_password);
+      addCommunityMember(communityMember); 
     } catch(e) {
       console.log(e.message);
       setErrorMessage(e.message); 

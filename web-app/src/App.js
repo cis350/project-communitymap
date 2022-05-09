@@ -32,8 +32,8 @@ function App({ navigation }) {
       setErrorMessage('');
       //gets the message from local storage
 
-      // const member = getCommunityMember(username, password); 
-      const member = getUser(username); 
+      const member = getCommunityMember(username, password); 
+      // const member = getUser(username); 
       if(member.password !== password) {
         throw new Error('incorrect password or username');
       }
