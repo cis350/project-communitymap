@@ -130,7 +130,6 @@ async function getAllEvents(db){
         throw new Error('could not get all events from database');
     }
 }
-
 //get event from the database
 async function getEvent(db, name){
     try {
