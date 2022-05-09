@@ -14,7 +14,7 @@ export const addEvent = async (title, date, location, description, imageURL, cre
                         +"&location="+location
                         +"&imgURL="+imageURL
                         +"&creator="+creator
-                        +"&time="+time
+                        +"&time="+time;
         
         console.log("this is the data: " + data);
         const response = await axios.post(`${domain}/events`, data);
@@ -26,14 +26,27 @@ export const addEvent = async (title, date, location, description, imageURL, cre
     }
 }
 
-// export const signup = async (user, title) => {
-//     try {
-//         const response = await axios.put(`${domain}/signup`);
-//     return response.status;
-//     }catch(e){
-//         throw e;
-//     }
-// }
+export const signup = async (user, name) => {
+    try {
+        console.log("trying to sign up");
+        const data = "username="+user + "&eventTitle="+name;
+        console.log(data);
+        const response = await axios.post(`${domain}/signup`, data);
+        console.log("signed up");
+        return response.status;
+    }catch(e){
+        throw e;
+    }
+}
+
+export const getMyEvents = async (name) => {
+    try {
+        const response = await axios.get(`${domain}/my-events/`+name);
+        return response.data;
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 export const getEventsList = async () => {
     try{

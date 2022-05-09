@@ -12,99 +12,9 @@ import Collapsible from 'react-native-collapsible';
 const api = require('./modules/api');
 
 function BrowseEventsScreen({ route, navigation }) {
-  let [EventList, setEventList] = useState([
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 1',
-      key: '1',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 2',
-      key: '2',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 3',
-      key: '3',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 4',
-      key: '4',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 5',
-      key: '5',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 6',
-      key: '6',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 7',
-      key: '7',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 8',
-      key: '8',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 9',
-      key: '9',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 10',
-      key: '10',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-    {
-      description: 'description: this is the detailed description.',
-      title: 'Event 11',
-      key: '0',
-      image:
-        'https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg?s=1500x700&q=85',
-    },
-  ]);
+  let [EventList, setEventList] = useState([]);
 
-  let [collapsedList, setCollapsedList] = useState([
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-  ]);
+  let [collapsedList, setCollapsedList] = useState([]);
 
   //The state will have to be collected from storage somehow, but for now this is dummy data
 
@@ -127,7 +37,7 @@ function BrowseEventsScreen({ route, navigation }) {
   //   },
   // ];
 
-  let { username } = route.params;
+  let username = route.params.username;
   const toggleCollapse = (i) => {
     var newList = { ...collapsedList };
     newList[i] = !newList[i];
@@ -135,9 +45,9 @@ function BrowseEventsScreen({ route, navigation }) {
   };
 
   const handleSignup = (e, item) => {
-    console.log(item);
-    api.signup(username, item.title);
-    alert('signed up for ' + item.title);
+    //console.log(item);
+    api.signup(username, item.name);
+    alert('signed up for ' + item.name);
   };
 
   const getEvents = async () => {
@@ -162,6 +72,7 @@ function BrowseEventsScreen({ route, navigation }) {
       if (eventlist[i].description === null){
         eventlist[i].description = "";
       }
+      
       newList[i] = true;
     }
     setCollapsedList(newList);
@@ -196,7 +107,11 @@ function BrowseEventsScreen({ route, navigation }) {
                         Location: {item.location}{"\n"}
                         Description: {item.description}</Text>
                 </View>
-                
+                <View style={{alignItems: 'center'}}>
+                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
+                    <Text>Sign up</Text>
+                  </TouchableOpacity>
+                </View>
               </Collapsible>
             </Pressable>
           )}
@@ -207,11 +122,7 @@ function BrowseEventsScreen({ route, navigation }) {
 }
 
 
-/*<View style={{alignItems: 'center'}}>
-                  <TouchableOpacity style = {styles.signupButton} onPress={(e) => handleSignup(e, item)}>
-                    <Text>Sign up</Text>
-                  </TouchableOpacity>
-                </View>*/
+
 
 export default BrowseEventsScreen;
 

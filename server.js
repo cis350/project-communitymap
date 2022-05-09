@@ -115,6 +115,28 @@ webapp.get('/events', async (_req, resp) => {
   }
 });
 
+webapp.get('/my-events/:name', async (_req, resp) =>{
+  try{
+    //console.log(_req.params.name);
+    console.log("getting my events for "+ _req.params.name);
+    const results = await lib.getMyEvents(db, _req.params.name);
+    resp.status(200).json({ data: results});
+  } catch (e) {
+    resp.status(500).json({ error: 'try again later' });
+  }
+});
+
+webapp.post('/signup', async (_req, resp) => {
+  console.log("trying to sign up");
+  try{
+    console.log('signing up'+_req.body.username + " " + _req.body.eventTitle);
+    await lib.signUp(db, _req.body.username, _req.body.eventTitle);
+    resp.status(200).json({message: 'signed up for event'});
+  } catch (e) {
+    resp.status(500).json({error: 'try again later'});
+  }
+});
+
 // 6. deleting an event 
 webapp.delete('/events', async (_req, resp) => {
   //req should have name (name of event) and currentAccount (username of the current account)

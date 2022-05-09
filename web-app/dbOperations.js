@@ -137,9 +137,49 @@ async function getEvent(db, name){
         console.log(results);
         return results;
     } catch (e) {
+        console.error(e);
         return null;
     }
 }
+
+async function getMyEvents(db, name){
+    try{
+        
+        const results = await db.collection('events').find({creator: name}).toArray();
+        return results;
+    } catch (e) {
+        console.error(e);
+        throw new Error('coud not get my events from database');
+    }
+}
+
+async function signUp(db, username, eventTitle){
+    try{
+        const event = await getEvent(db, eventTitle);
+        if (event.length !== 0){
+            let myevent = event[0];
+            let signedUp = [];
+            if (!myevent.hasOwnProperty('signedUp')){
+                signedUp = [username];
+            } else if (myevent.signedUp.length === 0) {
+                signedUp = [username];
+            } else {
+                if (!myevent.signedUp.includes(username)){
+                    signedUp = myevent.signedUp.push(username);
+                } else {
+                    signedUp = myevent.signedUp;
+                }
+            }
+            await db.collection('events').updateOne({name:eventTitle},{$set:{signedUp : signedUp}});
+            
+        }
+
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+
 
 //update event date
 const updateDate = async (db, event) => {
@@ -203,7 +243,7 @@ const updateImgURL = async (db, event) => {
 
 module.exports = {connect,addUser, deleteUser, getUser, deleteEvent, updatePhone, updateEmail,
     addEvent, getAllEvents, getEvent, updateDate, updatePassword, updateImgURL,
-    updateDescription, updateLocation, updateTime, updateNeighborhood};
+    updateDescription, updateLocation, updateTime, updateNeighborhood, getMyEvents, signUp};
 
 
 

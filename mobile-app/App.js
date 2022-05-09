@@ -12,6 +12,7 @@ import AddEventScreen from './AddEventScreen';
 import ViewEventScreen from './ViewEventScreen';
 import StartupScreen from './StartupScreen';
 import RegisterScreen from './RegisterScreen';
+import MyEventsScreen from './MyEventsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,11 @@ export default function App() {
           options={{ headerStyle: { backgroundColor: '#32f497' } }}
           name="View Event"
           component={ViewEventScreen}
+        />
+        <Stack.Screen
+          options={{ headerStyle: { backgroundColor: '#32f497' } }}
+          name="My Events"
+          component={MyEventsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -23,7 +23,7 @@ function HomeScreen({ route, navigation }) {
 
   function handleMap(e) {
 
-    // TODO: change this to Home Page
+    
     navigation.navigate('Map view', {
     username: username,
     });
@@ -31,8 +31,17 @@ function HomeScreen({ route, navigation }) {
   }
   function handleAddEvents(e) {
 
-    // TODO: change this to Home Page
+    
     navigation.navigate('Add Community Event', {
+    username: username,
+    });
+    
+  }
+
+  function handleMyEvents(e) {
+
+   
+    navigation.navigate('My Events', {
     username: username,
     });
     
@@ -67,6 +76,14 @@ function HomeScreen({ route, navigation }) {
           onPress={(e) => handleAddEvents(e)}
         >
           <Text style={styles.loginText}>Add Event</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          title="my events button"
+          style={styles.button}
+          onPress={(e) => handleMyEvents(e)}
+        >
+          <Text style={styles.loginText}>My Events</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
