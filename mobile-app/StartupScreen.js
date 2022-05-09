@@ -7,83 +7,36 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+ 
 
-function HomeScreen({ route, navigation }) {
+function StartupScreen({ navigation }) {
 
-    const username = route.params.username;
-  
-  function handleEvents(e) {
-
-    // TODO: change this to Home Page
-    navigation.navigate('Browse Events', {
-    username: username,
-    });
-    
+  function handleLogin(e) {
+    navigation.navigate('Login');
   }
 
-  function handleMap(e) {
-
-    
-    navigation.navigate('Map view', {
-    username: username,
-    });
-    
-  }
-  function handleAddEvents(e) {
-
-    
-    navigation.navigate('Add Community Event', {
-    username: username,
-    });
-    
-  }
-
-  function handleMyEvents(e) {
-
-   
-    navigation.navigate('My Events', {
-    username: username,
-    });
-    
+  function handleRegister(e) {
+    navigation.navigate('Register');
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.spacer_top}></View>
       <View style={styles.content}>
-        <Text style={styles.title}>
-            Welcome to CommunityMap!
-        </Text>
+        <Text style={styles.title}>CommunityMap</Text>        
         <TouchableOpacity
-          title="browse events button"
+          title="create"
           style={styles.button}
-          onPress={(e) => handleEvents(e)}
+          onPress={(e) => handleRegister(e)}
         >
-          <Text style={styles.loginText}>Browse Events</Text>
+          <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
-          title="map button"
+          title="login"
           style={styles.button}
-          onPress={(e) => handleMap(e)}
+          onPress={(e) => handleLogin(e)}
         >
-          <Text style={styles.loginText}>View Map</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          title="add event button"
-          style={styles.button}
-          onPress={(e) => handleAddEvents(e)}
-        >
-          <Text style={styles.loginText}>Add Event</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          title="my events button"
-          style={styles.button}
-          onPress={(e) => handleMyEvents(e)}
-        >
-          <Text style={styles.loginText}>My Events</Text>
+          <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
@@ -92,7 +45,7 @@ function HomeScreen({ route, navigation }) {
     </View>
   );
 }
-export default HomeScreen;
+export default StartupScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -114,8 +67,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     fontWeight: 'bold',
     marginBottom: 60,
-    color: '#fff',
-    textAlign: 'center'
+    color: '#fff'
   },
   login: {
     flex: 1,

@@ -1,108 +1,20 @@
-const express = require('express'); 
-const cors = require('cors'); 
-const jwt = require('jsonwebtoken'); 
-const lib = require('./web-app/dbOperations');
-
+// import express
+const express = require('express');
+// Create express app
+const webapp = express();
+// import database functions
+const lib = require('./dbOperations');
 // decalare db object
 let db;
 // mongo db url
 const url = 'mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retryWrites=true&w=majority';
 
-const webapp = express(); 
-
 webapp.use(express.json());
-webapp.use(express.urlencoded({
+webapp.use(
+  express.urlencoded({
     extended: true,
-}));
-
-webapp.use(cors({
-    credentials: true,
-    origin: true
-}));
-
-//Change the localHost
-webapp.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-
-let users = new Set(); 
-
-let messages = []; 
-
-webapp.post('/join/', (req, resp) => {
-    // check that the username was sent
-    if(!req.body.username || req.body.username.length === 0){
-        resp.status(400).json({error: 'missing username'});
-        return;
-    }
-    // get username
-    const username = req.body.username;
-    // create the JWT
-    const userToken = jwt.sign({
-        name: username,
-    }, 'this_is_a_secret_key', {expiresIn: '30s'});
-
-    users.add(username); 
-    resp.status(201).json({token: userToken});
-});
-
-
-webapp.post('/verify/', (req, resp) => {
-    // check that the token was sent
-    if(!req.body.token || req.body.token.length === 0){
-        resp.status(400).json({error: 'missing token'});
-        return;
-    }
-    // get the token
-    const userToken = req.body.token;
-    
-    // verify the user token
-    jwt.verify(userToken, 'this_is_a_secret_key', function(err, ){
-        if(err){
-            
-            // check if the error is an expiration error
-            if(err.name === 'TokenExpiredError'){
-                resp.status(302).json({error: 'session expired'});
-                return;
-            }
-        }
-        resp.json({message: 'session valid'});
-    })
-});
-
-webapp.get('/users', (_req, res) =>{
-    console.log('users', users);
-     res.json({
-         data: Array.from(users),
-     })
-});
-
-webapp.get('/messages', ( _req, resp ) => {
-    resp.json({data: messages, });
-});
-
-webapp.post('/messages', ( req, resp ) => {
-    if(!req.body.from || !req.body.to || !req.body.content) {
-        resp.status(400).json({error: 'missing message field(s)'});
-        return;
-    }
-    messages.push({
-        from: req.body.from, 
-        to: req.body.to, 
-        content: req.body.content
-    });
-    resp.status(201).json({receipt: 'ok'});
-
-});
-
-
-
-
-
-
+  }),
+);
 
 // Root endpoint
 webapp.get('/', (req, res) => {
@@ -155,18 +67,16 @@ webapp.delete('/accounts', async (_req, resp) => {
   }
 });
 
-//event had name, description, date, time, location, imgURL, creator
 // 4. making an event endpoint
 webapp.post('/events', async (_req, resp) => {
+  console.log("event posted in db");
   //checks that events name is unique
-  console.log(_req.body);
-  console.log(_req.body.imgURL);
   if ((await lib.getEvent(db, { name: _req.body.name })).length !== 0) {
     resp.status(409).json({ error: 'event already exists with same name' });
   } else {
     try {
       await lib.addEvent(db, { name: _req.body.name, description: _req.body.description, 
-        date: _req.body.date, location: _req.body.location, imgURL: _req.body.imgURL, 
+        date: _req.body.date, location: _req.body.location, imgURL: _req.body.imagURL, 
         time: _req.body.time, creator: _req.body.creator });
       resp.status(201).json({ message: 'event with id added' });
     } catch (error) {
@@ -192,28 +102,6 @@ webapp.get('/events', async (_req, resp) => {
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });
     }
-  }
-});
-
-webapp.get('/my-events/:name', async (_req, resp) =>{
-  try{
-    //console.log(_req.params.name);
-    console.log("getting my events for "+ _req.params.name);
-    const results = await lib.getMyEvents(db, _req.params.name);
-    resp.status(200).json({ data: results});
-  } catch (e) {
-    resp.status(500).json({ error: 'try again later' });
-  }
-});
-
-webapp.post('/signup', async (_req, resp) => {
-  console.log("trying to sign up");
-  try{
-    console.log('signing up'+_req.body.username + " " + _req.body.eventTitle);
-    await lib.signUp(db, _req.body.username, _req.body.eventTitle);
-    resp.status(200).json({message: 'signed up for event'});
-  } catch (e) {
-    resp.status(500).json({error: 'try again later'});
   }
 });
 
@@ -334,11 +222,13 @@ webapp.use((_req, res) => {
   res.status(404);
 });
 
-const port = 8080; 
+// declare port
+const port = 5000;
 
-webapp.listen(port, () => {
+// start the app and connect to db
+webapp.listen(port, async () => {
   db = await lib.connect(url);
-  console.log(`server running on port: ${port}`);
-}); 
+  console.log(`Server running on port:${port}`);
+});
 
 module.exports = webapp; // export to test
