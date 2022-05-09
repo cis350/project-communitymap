@@ -24,13 +24,19 @@ export default function Community() {
       console.log('users', chatUsers.current);
     }
     async function fetchMessages() {
+      const oldMessages = messages; 
       const mesgs = await getMessages(); 
+      if(oldMessages.length !== mesgs.length) {
+        console.log(oldMessages);
+        console.log(mesgs);
+        alert("you have recieved a new message");
+      }
       setMessages(mesgs); 
     }
 
     // we want to fetch the users frequently (5 s)
     //we will use server polling with setInterval
-    setInterval(() => {
+    setTimeout(() => {
       fetchUsers()
       fetchMessages();
     }, 5000);
@@ -95,7 +101,7 @@ function ConnectedUsers(props) {
 }
 
 function MessagesCommponent(props) {
-  let reciever = useRef(''); 
+  let reciever = useRef('all'); 
   let content = useRef(''); 
   const sendMsg = async(e) => {
     e.preventDefault(); 
@@ -110,7 +116,6 @@ function MessagesCommponent(props) {
         <hr/>
       </div>
       <h2>New Messages</h2>
-      <label>To: </label> <input type='text' onChange={(e) => reciever.current = e.target.value}/>
       <textarea cols="15" rows={5} onChange={(e) => content.current = e.target.value}/>
       <button type='button' onClick={(e) => sendMsg(e)}> Send </button>
     </div>

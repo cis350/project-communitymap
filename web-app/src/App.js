@@ -1,7 +1,10 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { React, useState } from 'react';
+import {
+  getUser
+} from './modules/api.js'
 
 import {
   initLocalStorage,
@@ -28,7 +31,12 @@ function App({ navigation }) {
     try {
       setErrorMessage('');
       //gets the message from local storage
-      const member = getCommunityMember(username, password); 
+
+      // const member = getCommunityMember(username, password); 
+      const member = getUser(username); 
+      if(member.password !== password) {
+        throw new Error('incorrect password or username');
+      }
       console.log(member.username);
       localStorage.setItem('currentUser', member.username); 
       handleLogin(member); 

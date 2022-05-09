@@ -4,6 +4,9 @@ import '../App.css'
 import {
   addCommunityMember,
 } from '../modules/storage';
+import {
+  addUser
+} from '../modules/api.js'
 
 export default function Signup() {
   const [username, setUsername] = useState("username");
@@ -22,14 +25,15 @@ export default function Signup() {
   function handleStart() {
     try {
       setErrorMessage(''); 
-      const communityMember = {
-        username:username, 
-        password:password, 
-        re_password:re_password,
-        phone:phone, 
-        email:email,
-      };
-      addCommunityMember(communityMember); 
+      // const communityMember = {
+      //   username:username, 
+      //   password:password, 
+      //   re_password:re_password,
+      //   phone:phone, 
+      //   email:email,
+      // };
+      addUser(username, phone, email, password, re_password);
+      // addCommunityMember(communityMember); 
     } catch(e) {
       console.log(e.message);
       setErrorMessage(e.message); 

@@ -336,7 +336,7 @@ webapp.use((_req, res) => {
 
 const port = 8080; 
 
-webapp.listen(port, () => {
+webapp.listen(port, async () => {
   db = await lib.connect(url);
   console.log(`server running on port: ${port}`);
 }); 
