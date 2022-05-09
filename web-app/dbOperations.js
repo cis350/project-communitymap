@@ -161,14 +161,16 @@ async function signUp(db, username, eventTitle){
             let signedUp = [];
             if (!myevent.hasOwnProperty('signedUp')){
                 signedUp = [username];
+            } else if (!Array.isArray(myevent.signedUp)){
+                signedUp = [username];
             } else if (myevent.signedUp.length === 0) {
                 signedUp = [username];
             } else {
+                console.log("here");
                 if (!myevent.signedUp.includes(username)){
-                    signedUp = myevent.signedUp.push(username);
-                } else {
-                    signedUp = myevent.signedUp;
+                    myevent.signedUp.push(username);
                 }
+                signedUp = myevent.signedUp;
             }
             await db.collection('events').updateOne({name:eventTitle},{$set:{signedUp : signedUp}});
             

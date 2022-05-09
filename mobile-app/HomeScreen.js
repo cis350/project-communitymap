@@ -135,12 +135,12 @@ const styles = StyleSheet.create({
   },
   spacer_top: {
     width: 10,
-    height: 125,
+    height: 50,
     backgroundColor: '#5e6475'
   },
   spacer_bot: {
     width: 10,
-    height: 200,
+    height: 150,
     backgroundColor: '#5e6475'
   },
   button: {
