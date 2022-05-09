@@ -81,12 +81,12 @@ export const addUser = async (username, phone, email, password, re_password) => 
   try {
     if(username.length> 0 && phone.length > 0 && email.length > 0 && password.length > 0 ){
       isValid(username, phone, email, password, re_password);
-      const data = "name=" + username
+      const data = "username=" + username
                     +"&phone=" + phone
                     +"&email=" + email
                     +"&password=" +password; 
       const response = await axios.post(`${domain}/accounts`, data);
-      // `name=${username}$phone=${phone}$password=${password}$email=${email}`); 
+      // `username=${username}$phone=${phone}$password=${password}$email=${email}`); 
       return response.status; 
     }
   } catch(err) {
@@ -98,7 +98,7 @@ export const addUser = async (username, phone, email, password, re_password) => 
 export const getUser = async (username) => {
   try {
     if(username.length > 0) {
-      const response = await axios.get(`${domain}/accounts`, `name=${username}`); 
+      const response = await axios.get(`${domain}/accounts`, `username=${username}`); 
       return response.data.data; 
     }
   } catch(err)  {
@@ -110,7 +110,7 @@ export const getUser = async (username) => {
 export const deleteUser = async (username) => {
   try {
     if(username.length > 0) {
-      const response = await axios.delete(`${domain}/accounts`, `name=${username}`); 
+      const response = await axios.delete(`${domain}/accounts`, `username=${username}`); 
       return response.status; 
     }
   } catch(err)  {
@@ -122,7 +122,7 @@ export const updateUser = async (username, email, password) => {
   try {
     if(username.length > 0) {
       const response = await axios.delete(`${domain}/accounts`, 
-      `name=${username}$password=${password}$email=${email}`); 
+      `username=${username}$password=${password}$email=${email}`); 
       return response.status; 
     }
   } catch(err)  {

@@ -108,8 +108,8 @@ webapp.get('/', (req, res) => {
 webapp.post('/accounts', async (_req, resp) => {
   if (!_req.body.username || _req.body.username.length === 0) {
     resp.status(400).json({ error: 'bad input parameters' });
-  } else if ((await lib.getUser(db, { username: _req.body.username })).length !== 0) {
-    resp.status(409).json({ error: 'account already exists' });
+  // } else if ((await lib.getUser(db, { username: _req.body.username })).length !== 0) {
+  //   resp.status(409).json({ error: 'account already exists' });
   } else {
     try {
       await lib.addUser(db, { username: _req.body.username, email: _req.body.email, 

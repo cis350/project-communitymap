@@ -27,18 +27,19 @@ function App({ navigation }) {
     });
   }
 
-  function handleStart() {
+  async function handleStart() {
     try {
       setErrorMessage('');
       //gets the message from local storage
 
-      const member = getCommunityMember(username, password); 
-      // const member = getUser(username); 
-      if(member.password !== password) {
-        throw new Error('incorrect password or username');
-      }
+      // const member = getCommunityMember(username, password); 
+      const member = await getUser(username); 
+      console.log(member);
+      // if(member.password !== password) {
+      //   throw new Error('incorrect password or username');
+      // }
       console.log(member.username);
-      localStorage.setItem('currentUser', member.username); 
+      localStorage.setItem('currentUser', username); 
       handleLogin(member); 
     } catch(e) {
       console.log(e.message);
