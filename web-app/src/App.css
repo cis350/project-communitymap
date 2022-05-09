@@ -70,3 +70,14 @@ button.signup {
 .flex-child:first-child {
   margin-right: 20px;
 }
+
+
+div.scroll {
+  background-color: #32f497;
+  width: 600px;
+  height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: left;
+  padding: 20px;
+}

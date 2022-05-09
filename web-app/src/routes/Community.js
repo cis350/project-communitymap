@@ -106,7 +106,7 @@ function MessagesCommponent(props) {
     <div>
       <div>
         <h2>Previous Messages</h2>
-        <div>{props.messages.map( msg => <p>{JSON.stringify(msg)}</p>)}</div>
+        <div className="scroll">{props.messages.map( msg => <p>{msg.from}: {msg.content}</p>)}</div>
         <hr/>
       </div>
       <h2>New Messages</h2>
