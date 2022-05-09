@@ -73,7 +73,7 @@ button.signup {
 
 
 div.scroll {
-  background-color: #32f497;
+  background-color: rgba(196, 196, 196, 0.5);
   width: 600px;
   height: 150px;
   overflow-x: hidden;

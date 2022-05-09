@@ -118,11 +118,11 @@ export const deleteUser = async (username) => {
   }
 }
 
-export const updateUser = async (username, email, password) => {
+export const updateUserPassword = async (username, password) => {
   try {
     if(username.length > 0) {
-      const response = await axios.delete(`${domain}/accounts`, 
-      `username=${username}$password=${password}$email=${email}`); 
+      const response = await axios.put(`${domain}/accounts`, 
+      `username=${username}&password=${password}`); 
       return response.status; 
     }
   } catch(err)  {
@@ -130,20 +130,70 @@ export const updateUser = async (username, email, password) => {
   }
 }
 
-//put - update 
-export const addEvent = async (title, date, location, description, imageUrl) => {
-    const response = await axios.post(`${domain}/events`);
-    return response.status;
+export const updateUserEmail = async (username, email) => {
+  try {
+    if(username.length > 0) {
+      console.log("In API ");
+      const response = await axios.put(`${domain}/accounts`, 
+      `username=${username}&email=${email}`); 
+      return response.status; 
+    }
+  } catch(err)  {
+    console.log(err);
+  }
 }
 
-export const signup = async (user, title) => {
-    const response = await axios.put(`${domain}/signup`);
-    return response.status;
+export const addEvent = async (title, date, location, description, imageURL, creator, time) => {
+    
+  try{
+      
+      console.log("api adding event");
+      const data = "name="+title
+                      +"&description="+description
+                      +"&date="+date
+                      +"&location="+location
+                      +"&imgURL="+imageURL
+                      +"&creator="+creator
+                      +"&time="+time;
+      
+      console.log("this is the data: " + data);
+      const response = await axios.post(`${domain}/events`, data);
+      console.log("event added");
+      return response.status;
+  }catch(e){
+      console.log("api add event failed");
+      throw e;
+  }
+}
+// API for events
+export const signup = async (user, name) => {
+  try {
+      console.log("trying to sign up");
+      const data = "username="+user + "&eventTitle="+name;
+      console.log(data);
+      const response = await axios.post(`${domain}/signup`, data);
+      console.log("signed up");
+      return response.status;
+  }catch(e){
+      throw e;
+  }
+}
 
+export const getMyEvents = async (name) => {
+  try {
+      const response = await axios.get(`${domain}/my-events/`+name);
+      return response.data;
+  } catch (e) {
+      console.error(e);
+  }
 }
 
 export const getEventsList = async () => {
-    const response = await axios.get(`${domain}/events`);
-    return response.data;
+  try{
+      const response = await axios.get(`${domain}/events`);
+      return response.data;
+  }catch(e){
+      console.error(e);
+  }
 }
 

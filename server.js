@@ -137,14 +137,11 @@ webapp.delete('/accounts/:name', async (_req, resp) => {
   // req should include username of the account to delete
   
   if (!_req.params.name || _req.params.name.length === 0) {
-    console.log("thi is where i am");
     resp.status(400).json({ error: 'bad input parameters' });
   } else if ((await lib.getUser(db, _req.params.name)).length === 0) {
-    console.log("hello");
     resp.status(409).json({ error: 'account does not exist' });
   } else {
     try {
-      console.log(_req.params.name);
       await lib.deleteUser(db, _req.params.name);
       resp.status(200).json({ message: 'Account deleted' });
     } catch (error) {
@@ -195,7 +192,6 @@ webapp.get('/events', async (_req, resp) => {
 
 webapp.get('/my-events/:name', async (_req, resp) =>{
   try{
-    //console.log(_req.params.name);
     console.log("getting my events for "+ _req.params.name);
     const results = await lib.getMyEvents(db, _req.params.name);
     resp.status(200).json({ data: results});
@@ -290,9 +286,12 @@ webapp.put('/accounts', async (_req, resp) => {
   //username is mandatory
   //checks what attribute is to be updated
   //email
+  console.log("I am here");
+  console.log( _req.body.password); 
+  console.log( _req.body.username); 
   if (typeof _req.body.email !== 'undefined') {
     try {
-      await lib.updateEmail(db, { name: _req.body.name, email: _req.body.emial });
+      await lib.updateEmail(db, { name: _req.body.username, email: _req.body.email });
       resp.status(200).json({ message: 'account emial updated' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });
@@ -301,7 +300,7 @@ webapp.put('/accounts', async (_req, resp) => {
   //password
   if (typeof _req.body.password !== 'undefined') {
     try {
-      await lib.updatePassword(db, { name: _req.body.name, password: _req.body.password });
+      await lib.updatePassword(db, { name: _req.body.username, password: _req.body.password });
       resp.status(200).json({ message: 'accounts password updated' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });

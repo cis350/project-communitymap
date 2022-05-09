@@ -63,8 +63,23 @@ const updateNeighborhood = async (db, user) => {
 //update email
 const updateEmail = async (db, user) => {
     try{
-        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{email: user.email}});
+        
+        const result = await db.collection('accounts').updateOne({username: user.name},{$set:{email: user.email}});
         console.log(`updated email`);
+        return result;
+    } catch(err){
+        console.error(err);
+        throw new Error('could not update email');
+    }
+}
+
+//update password
+const updatePassword = async (db, user) => {
+    try{
+        console.log(user.password);
+        console.log(user.name);
+        const result = await db.collection('accounts').updateOne({username: user.name},{$set:{password: user.password}});
+        console.log(`updated password`);
         return result;
     } catch(err){
         console.error(err);
@@ -84,17 +99,7 @@ const updatePhone = async (db, user) => {
     }
 }
 
-//update password
-const updatePassword = async (db, user) => {
-    try{
-        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{password: user.password}});
-        console.log(`updated password`);
-        return result;
-    } catch(err){
-        console.error(err);
-        throw new Error('could not update email');
-    }
-}
+
 
 //---Operations for events---
 const addEvent = async (db, newEvent) => {

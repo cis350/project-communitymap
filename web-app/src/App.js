@@ -30,9 +30,7 @@ function App({ navigation }) {
   async function handleStart() {
     try {
       setErrorMessage('');
-      //gets the message from local storage
 
-      // const member = getCommunityMember(username, password); 
       const array = await getUser(username); 
       const member = array[0]; 
       console.log(member);
@@ -41,6 +39,8 @@ function App({ navigation }) {
       }
       console.log(username);
       localStorage.setItem('currentUser', username); 
+      localStorage.setItem('phone', member.phone); 
+      sessionStorage.clear(); 
       handleLogin(member); 
     } catch(e) {
       console.log(e.message);

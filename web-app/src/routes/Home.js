@@ -21,7 +21,7 @@ export default function Home({ route, navigation }) {
         <Link to="/map">Map</Link> |{" "}
         <Link to="/account">Account</Link>
       </nav>
-      <h2>Welcome back User!</h2>   
+      <h2>Welcome back {localStorage.getItem("currentUser")}!</h2>   
       <div className="flex-container">
           <div className="flex-child">
               <h2>Your Upcoming Events</h2>
@@ -34,6 +34,4 @@ export default function Home({ route, navigation }) {
       </div>
     </main>
   );
-
-  // if user not signed in 
-  }
+}
