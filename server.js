@@ -123,9 +123,9 @@ webapp.post('/accounts', async (_req, resp) => {
 });
 
 // 2. signing into an account endpoint, getting accounts events endpoint, getting account info endpoint
-webapp.get('/accounts', async (_req, resp) => {
+webapp.get('/accounts/:name', async (_req, resp) => {
   try {
-    const results = await lib.getUser(db, { username: _req.body.username });
+    const results = await lib.getUser(db, _req.params.name);
     resp.status(200).json({data: results});
   } catch (error) {
     resp.status(500).json({ error: 'try again later' });
@@ -133,15 +133,19 @@ webapp.get('/accounts', async (_req, resp) => {
 });
 
 // 3. deleting an account endpoint
-webapp.delete('/accounts', async (_req, resp) => {
+webapp.delete('/accounts/:name', async (_req, resp) => {
   // req should include username of the account to delete
-  if (!_req.body.username || _req.body.username.length === 0) {
+  
+  if (!_req.params.name || _req.params.name.length === 0) {
+    console.log("thi is where i am");
     resp.status(400).json({ error: 'bad input parameters' });
-  } else if ((await lib.getPlayer(db, { username: _req.body.username })).length === 0) {
+  } else if ((await lib.getUser(db, _req.params.name)).length === 0) {
+    console.log("hello");
     resp.status(409).json({ error: 'account does not exist' });
   } else {
     try {
-      await lib.deleteUser(db, _req.body.username);
+      console.log(_req.params.name);
+      await lib.deleteUser(db, _req.params.name);
       resp.status(200).json({ message: 'Account deleted' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });

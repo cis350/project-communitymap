@@ -43,7 +43,7 @@ export default function Signup() {
   
   return (
     <main style={{ padding: "1rem 0" }}>
-      <nav className="navBar"
+      {/* <nav className="navBar"
         style={{
           borderBottom: "solid 1px",
           paddingBottom: "1rem",
@@ -55,7 +55,7 @@ export default function Signup() {
         <Link to="/community">Community</Link> |{" "}
         <Link to="/map">Map</Link>
         
-      </nav>
+      </nav> */}
       <div className='center'>
         <h2>Signup!</h2>
         <form>

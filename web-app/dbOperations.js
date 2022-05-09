@@ -29,7 +29,7 @@ const addUser = async (db, newUser) => {
 //delete account from the database
 const deleteUser = async (db, user) => {
     try{
-        const result = await db.collection('accounts').deleteOne({username: user.username});
+        const result = await db.collection('accounts').deleteOne({username: user});
         console.log(`deleted player with id: ${result.deletedId} and user info: ${user}`);
         return result;
     } catch(err){
@@ -41,7 +41,7 @@ const deleteUser = async (db, user) => {
 //get a users account from the database
 async function getUser(db, user){
     try {
-        const results = await db.collection('accounts').find({ username: user.username });
+        const results = await db.collection('accounts').find({ username: user }).toArray();
         return results;
     } catch (e) {
         return null;

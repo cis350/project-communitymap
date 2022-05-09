@@ -98,7 +98,7 @@ export const addUser = async (username, phone, email, password, re_password) => 
 export const getUser = async (username) => {
   try {
     if(username.length > 0) {
-      const response = await axios.get(`${domain}/accounts`, `username=${username}`); 
+      const response = await axios.get(`${domain}/accounts/${username}`); 
       return response.data.data; 
     }
   } catch(err)  {
@@ -110,7 +110,7 @@ export const getUser = async (username) => {
 export const deleteUser = async (username) => {
   try {
     if(username.length > 0) {
-      const response = await axios.delete(`${domain}/accounts`, `username=${username}`); 
+      const response = await axios.delete(`${domain}/accounts/${username}`); 
       return response.status; 
     }
   } catch(err)  {

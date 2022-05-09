@@ -33,12 +33,13 @@ function App({ navigation }) {
       //gets the message from local storage
 
       // const member = getCommunityMember(username, password); 
-      const member = await getUser(username); 
+      const array = await getUser(username); 
+      const member = array[0]; 
       console.log(member);
-      // if(member.password !== password) {
-      //   throw new Error('incorrect password or username');
-      // }
-      console.log(member.username);
+      if(member.password !== password) {
+        throw new Error('incorrect password or username');
+      }
+      console.log(username);
       localStorage.setItem('currentUser', username); 
       handleLogin(member); 
     } catch(e) {

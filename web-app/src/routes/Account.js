@@ -1,5 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
+import {
+  deleteUser
+} from '../modules/api.js'
+
 
 import '../App.css'
 
@@ -14,9 +18,19 @@ export default function AccountInfo() {
   let testUser = localStorage.getItem('currentUser'); 
   let phone = '3036190189'; 
 
-  function handleDelete() {
+  let navigate = useNavigate(); 
+  const handleLogin = () =>{ 
+    let path = `/`; 
+    navigate(path);
+  }
+
+  async function handleDelete() {
     //TO DO 
     //1. Delete the account from the backend
+    console.log("i am here");
+    const status = await deleteUser(name);
+    console.log(status); 
+    handleLogin();
     console.log('Account to be deleted')
   }
 
