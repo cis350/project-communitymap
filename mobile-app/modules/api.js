@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-//const domain = 'http://localhost:5000';
-const domain = "http://192.168.0.30:5000";
+const domain = 'http://localhost:8080';
+//const domain = "http://192.168.0.30:5000";
 //Domain must be changed to you ip address when 
 //running the app on a mobile device rather than 
 //the web view
 
-export const addEvent = async (title, date, location, description, imageURL, creator, time, coordinates) => {
+export const addEvent = async (title, date, location, description, imageURL, creator, time, latitude, longitude) => {
     
     try{
         
@@ -18,7 +18,8 @@ export const addEvent = async (title, date, location, description, imageURL, cre
                         +"&imgURL="+imageURL
                         +"&creator="+creator
                         +"&time="+time
-                        +"&coordinates="+coordinates;
+                        +"&latitude="+latitude
+                        +"&longitude="+longitude;
         
         console.log("this is the data: " + data);
         const response = await axios.post(`${domain}/events`, data);

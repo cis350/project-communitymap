@@ -22,7 +22,7 @@ export default function Home({ route, navigation }) {
         <Link to="/account">Account</Link>
       </nav>
       <h2>Welcome back {localStorage.getItem("currentUser")}!</h2>   
-      <div className="flex-container">
+      {/* <div className="flex-container">
           <div className="flex-child">
               <h2>Your Upcoming Events</h2>
           </div>
@@ -30,7 +30,7 @@ export default function Home({ route, navigation }) {
           <div className="flex-child">
               <h2>Google Map</h2>
           </div>
-      </div>
+      </div> */}
     </main>
   );
 }

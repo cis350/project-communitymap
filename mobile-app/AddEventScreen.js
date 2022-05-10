@@ -32,7 +32,9 @@ function AddEventScreen({ navigation, route }) {
     } else if (location.length == 0) {
       alert('Error: Event location required');
     } else {
-      api.addEvent(title, date, location, description, imageUrl, username, time, coordinates);
+      const stringArray = coordinates.split(",");
+      console.log(stringArray);
+      api.addEvent(title, date, location, description, imageUrl, username, time, stringArray[0].trim(), stringArray[1].trim());
       alert('Event Added!');
     }
   }
