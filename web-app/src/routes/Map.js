@@ -74,11 +74,20 @@ export default function Map() {
             text="My Marker"
             color="red"
           />
-          {/* <ul>{liveEvents.current.data.map(event =>  <Marker lat={event.latitude} lng={event.longitude}/>)}</ul> */}
-          <Marker
+
+          {/* <AnyReactComponent
+            lat={liveEvents.current.data[0].latitude}
+            lng={liveEvents.current.data[0].longitude}
+            text="this is a marker"
+            color="red"
+          /> */}
+          {liveEvents.current.data.map(event =>  <AnyReactComponent lat={event.latitude} lng={event.longitude} text={event.name} color="red"/>)}
+          {/* {liveEvents.current.data.map((event, index) =>  <Marker  key={Math.random()} coordinate={{lat: event.latitude, lng: event.longitude}} title={event.name} pinColor={'purple'}/>)} */}
+          {/* <Marker
+          {/* <Marker
             lat={liveEvents.coordinates.latitude}
             lng={liveEvents.coordinates.longitude}
-          />
+          /> */}
         </GoogleMapReact>
       </div>
     </main>
