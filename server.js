@@ -162,7 +162,7 @@ webapp.post('/events', async (_req, resp) => {
     try {
       await lib.addEvent(db, { name: _req.body.name, description: _req.body.description, 
         date: _req.body.date, location: _req.body.location, imgURL: _req.body.imgURL, 
-        time: _req.body.time, creator: _req.body.creator });
+        time: _req.body.time, creator: _req.body.creator, coordinates: _req.body.coordinates });
       resp.status(201).json({ message: 'event with id added' });
     } catch (error) {
       resp.status(500).json({ error: 'try again later' });

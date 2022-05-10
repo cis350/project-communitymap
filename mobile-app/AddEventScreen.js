@@ -16,6 +16,7 @@ function AddEventScreen({ navigation, route }) {
   const [date, setDate] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [time, setTime] = useState('');
+  const [coordinates, setCoordinates] = useState('');
   let username = route.params.username;
   //console.log(username);
 
@@ -31,14 +32,14 @@ function AddEventScreen({ navigation, route }) {
     } else if (location.length == 0) {
       alert('Error: Event location required');
     } else {
-      api.addEvent(title, date, location, description, imageUrl, username, time);
+      api.addEvent(title, date, location, description, imageUrl, username, time, coordinates);
       alert('Event Added!');
     }
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.spacer_top}></View>
+      
       <View style={styles.content}>
         <Text style={styles.title}>Enter your event's {'\n'} information</Text>
         <Text style={styles.directions}>Enter event title:</Text>
@@ -71,6 +72,11 @@ function AddEventScreen({ navigation, route }) {
           style={styles.login}
           onChangeText={(value) => setImageUrl(value)}
         />
+        <Text style={styles.directions}>Enter coordinates (long, lat):</Text>
+        <TextInput
+          style={styles.login}
+          onChangeText={(value) => setCoordinates(value)}
+        />
         <TouchableOpacity
           title="submitEventBtn"
           style={styles.button}
@@ -81,7 +87,7 @@ function AddEventScreen({ navigation, route }) {
 
         <StatusBar style="auto" />
       </View>
-      <View style={styles.spacer_bot}></View>
+      <View style = {styles.spacer_bot}></View>
     </View>
   );
 }
@@ -105,7 +111,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginVertical: 15,
     fontWeight: 'bold',
     marginBottom: 30,
     color: '#fff',
@@ -120,8 +125,6 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 120,
     height: 30,
     width: 275,
-    height: 400,
-    borderRadius: 10,
   },
   directions: {
     fontSize: 18,
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
   },
   spacer_bot: {
     width: 10,
-    height: 140,
+    height: 50,
     backgroundColor: '#5e6475'
   },
   button: {

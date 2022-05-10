@@ -128,10 +128,10 @@ function MyEventsScreen({ navigation, route }) {
     // ];
 
     let { username } = route.params;
-        const toggleCollapse = (i) => {
-        var newList = { ...collapsedList };
-        newList[i] = !newList[i];
-        setCollapsedList(newList);
+    const toggleCollapse = (i) => {
+    var newList = { ...collapsedList };
+    newList[i] = !newList[i];
+    setCollapsedList(newList);
     };
 
     
@@ -183,7 +183,7 @@ function MyEventsScreen({ navigation, route }) {
     return (
     <View style={styles.container}>
         <View style={styles.backgroundBlock}>
-        <Text style={styles.title}>My Events</Text>
+        <Text style={styles.title}>My Created Events</Text>
         <FlatList
             data={EventList}
             renderItem={({ item }) => (
@@ -198,6 +198,7 @@ function MyEventsScreen({ navigation, route }) {
                 <Collapsible collapsed={collapsedList[item.key]} align="center">
                 <View style = {{marginVertical: 10}}>
                     <Text>Date: {item.date}{"\n"}
+                        Time: {item.time}{"\n"}
                         Location: {item.location}{"\n"}
                         Description: {item.description}{"\n"}
                         Participants: {item.signedUpString} </Text>
