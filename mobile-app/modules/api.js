@@ -6,7 +6,7 @@ const domain = 'http://localhost:8080';
 //running the app on a mobile device rather than 
 //the web view
 
-export const addEvent = async (title, date, location, description, imageURL, creator, time, coordinates) => {
+export const addEvent = async (title, date, location, description, imageURL, creator, time, latitude, longitude) => {
     
     try{
         
@@ -18,7 +18,8 @@ export const addEvent = async (title, date, location, description, imageURL, cre
                         +"&imgURL="+imageURL
                         +"&creator="+creator
                         +"&time="+time
-                        +"&coordinates="+coordinates;
+                        +"&latitude="+latitude
+                        +"&longitude="+longitude;
         
         console.log("this is the data: " + data);
         const response = await axios.post(`${domain}/events`, data);
