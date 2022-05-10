@@ -74,11 +74,11 @@ export default function Map() {
             text="My Marker"
             color="red"
           />
-          <ul>{liveEvents.current.data.map(event =>  <Marker lat={event.latitude} lng={event.longitude}/>)}</ul>
-          {/* <Marker
+          {/* <ul>{liveEvents.current.data.map(event =>  <Marker lat={event.latitude} lng={event.longitude}/>)}</ul> */}
+          <Marker
             lat={liveEvents.coordinates.latitude}
             lng={liveEvents.coordinates.longitude}
-          /> */}
+          />
         </GoogleMapReact>
       </div>
     </main>
