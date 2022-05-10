@@ -5,10 +5,8 @@ const {MongoClient} = require('mongodb');
 const connect = async (url) => {
     try{
         const con = (await MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})).db();
-        console.log(`Connected to database: ${con.databaseName}`);
         return con;
     } catch(err){
-        console.error(err);
         throw new Error('could not connect to db');
     }
 }
@@ -18,10 +16,8 @@ const connect = async (url) => {
 const addUser = async (db, newUser) => {
     try{
         const result = await db.collection('accounts').insertOne(newUser);
-        console.log(`added user with id: ${result.insertedId}`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not add user');
     }
 }
@@ -30,10 +26,8 @@ const addUser = async (db, newUser) => {
 const deleteUser = async (db, user) => {
     try{
         const result = await db.collection('accounts').deleteOne({username: user});
-        console.log(`deleted player with id: ${result.deletedId} and user info: ${user}`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not delete user');
     }
 }
@@ -51,11 +45,9 @@ async function getUser(db, user){
 //update neighborhood
 const updateNeighborhood = async (db, user) => {
     try{
-        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{neighborhood: user.neighbood}});
-        console.log(`updated neighborhood`);
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{neighborhood: user.neighborhood}});
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update neighborhood');
     }
 }
@@ -63,12 +55,10 @@ const updateNeighborhood = async (db, user) => {
 //update email
 const updateEmail = async (db, user) => {
     try{
-        
-        const result = await db.collection('accounts').updateOne({username: user.name},{$set:{email: user.email}});
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{email: user.email}});
         console.log(`updated email`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update email');
     }
 }
@@ -76,25 +66,20 @@ const updateEmail = async (db, user) => {
 //update password
 const updatePassword = async (db, user) => {
     try{
-        console.log(user.password);
-        console.log(user.name);
-        const result = await db.collection('accounts').updateOne({username: user.name},{$set:{password: user.password}});
-        console.log(`updated password`);
+        const result = await db.collection('accounts').updateOne({username: user.username},{$set:{password: user.password}});
         return result;
     } catch(err){
-        console.error(err);
-        throw new Error('could not update email');
+        throw new Error('could not update password');
     }
 }
+
 
 //update phone
 const updatePhone = async (db, user) => {
     try{
         const result = await db.collection('accounts').updateOne({username: user.username},{$set:{phone: user.phone}});
-        console.log(`updated phone`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update email');
     }
 }
@@ -105,10 +90,8 @@ const updatePhone = async (db, user) => {
 const addEvent = async (db, newEvent) => {
     try{
         const result = await db.collection('events').insertOne(newEvent);
-        console.log(`added event with id: ${result.insertedId}`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not add event');
     }
 }
@@ -120,7 +103,6 @@ const deleteEvent = async (db, name) => {
         console.log(`deleted event`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not delete event');
     }
 }
@@ -131,7 +113,6 @@ async function getAllEvents(db){
         const results = await db.collection('events').find({}).toArray();
         return results;
     } catch (error) {
-        console.error(error);
         throw new Error('could not get all events from database');
     }
 }
@@ -139,10 +120,8 @@ async function getAllEvents(db){
 async function getEvent(db, name){
     try {
         const results = await db.collection('events').find({name: name}).toArray();
-        console.log(results);
         return results;
     } catch (e) {
-        console.error(e);
         return null;
     }
 }
@@ -153,7 +132,6 @@ async function getMyEvents(db, name){
         const results = await db.collection('events').find({creator: name}).toArray();
         return results;
     } catch (e) {
-        console.error(e);
         throw new Error('coud not get my events from database');
     }
 }
@@ -190,10 +168,8 @@ async function signUp(db, username, eventTitle){
 const updateDate = async (db, event) => {
     try{
         const result = await db.collection('events').updateOne({name: event.name},{$set:{date: event.date}});
-        console.log(`updated event date`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update date of event');
     }
 }
@@ -202,10 +178,8 @@ const updateDate = async (db, event) => {
 const updateTime = async (db, event) => {
     try{
         const result = await db.collection('events').updateOne({name: event.name},{$set:{time: event.time}});
-        console.log(`updated event time`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update time of event');
     }
 }
@@ -214,10 +188,8 @@ const updateTime = async (db, event) => {
 const updateLocation = async (db, event) => {
     try{
         const result = await db.collection('events').updateOne({name: event.name},{$set:{location: event.location}});
-        console.log(`updated event location`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update location of event');
     }
 }
@@ -226,10 +198,8 @@ const updateLocation = async (db, event) => {
 const updateDescription = async (db, event) => {
     try{
         const result = await db.collection('events').updateOne({name: event.name},{$set:{description: event.description}});
-        console.log(`changed event description`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update the description of the event');
     }
 }
@@ -238,10 +208,8 @@ const updateDescription = async (db, event) => {
 const updateImgURL = async (db, event) => {
     try{
         const result = await db.collection('events').updateOne({name: event.name},{$set:{imgURL: event.imgURL}});
-        console.log(`changed event img`);
         return result;
     } catch(err){
-        console.error(err);
         throw new Error('could not update the image of the event');
     }
 }
