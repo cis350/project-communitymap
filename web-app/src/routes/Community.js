@@ -80,7 +80,7 @@ export default function Community() {
       </nav>
       <h2>Community</h2>
       <div>
-        <button type="button" onClick={(e) => authenticate(e)}>Join the Chat </button>
+        <button type="button" onClick={(e) => authenticate(e)}>Join the Chat</button>
         <hr />
         <ConnectedUsers users={chatUsers.current}/>
         <MessagesCommponent user={username.current} messages={messages}/>

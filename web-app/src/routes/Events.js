@@ -145,7 +145,7 @@ export default function Events() {
             />
           </div>
         </form>
-        <button type='button' onClick={(e) => createEvent(e)}> Create Event </button>
+        <button type='button' onClick={(e) => createEvent(e)}>Create Event</button>
       </div>
     </main>
   );
