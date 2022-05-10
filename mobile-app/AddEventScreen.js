@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginVertical: 15,
     fontWeight: 'bold',
     marginBottom: 30,
     color: '#fff',
@@ -120,8 +119,6 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 120,
     height: 30,
     width: 275,
-    height: 400,
-    borderRadius: 10,
   },
   directions: {
     fontSize: 18,
