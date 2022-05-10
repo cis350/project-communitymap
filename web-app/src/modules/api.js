@@ -1,5 +1,5 @@
 import axios from 'axios';
-const domain ='http://localhost:8080';
+const domain = !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? 'http://localhost:8080':'';
 
 // joinChat takes the username as a parameter
 // and sends it to the server. And return the JWT

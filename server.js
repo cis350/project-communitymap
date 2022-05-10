@@ -10,6 +10,12 @@ const url = 'mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retr
 
 const webapp = express(); 
 
+//import path
+const path = require('path');
+
+//tell express where to find static files
+webapp.use(express.static(path.join(__dirname,'./web-app/build')));
+
 webapp.use(express.json());
 webapp.use(express.urlencoded({
     extended: true,
@@ -98,10 +104,7 @@ webapp.post('/messages', ( req, resp ) => {
 
 });
 
-// Root endpoint
-webapp.get('/', (req, res) => {
-  res.json({ message: 'root' });
-});
+
 
 //endpoints
 // 1. adding a new account endpoint
@@ -348,11 +351,19 @@ webapp.use((_req, res) => {
   res.status(404);
 });
 
-const port = 8080; 
+
+// wildcard endpoint
+webapp.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,'./web-app/build/index.html'));
+});
+
+const port = process.env.PORT || 8080; 
 
 webapp.listen(port, async () => {
   db = await lib.connect(url);
   console.log(`server running on port: ${port}`);
 }); 
+
+
 
 module.exports = webapp; // export to test

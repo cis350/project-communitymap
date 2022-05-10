@@ -4,7 +4,9 @@
   "description": "a chat room with live updates",
   "main": "server.js",
   "scripts": {
-    "test": "jest --coverage --forceExit"
+    "test": "jest --coverage --forceExit",
+    "start": "node server.js",
+    "build": "npm install && cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "jest": "^28.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
+    "path": "^0.12.7",
     "supertest": "^6.2.3"
   }
 }
