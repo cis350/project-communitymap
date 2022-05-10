@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-//const domain = 'http://localhost:5000';
-const domain = "http://192.168.0.30:5000";
+const domain = 'http://localhost:8080';
+//const domain = "http://192.168.0.30:5000";
 //Domain must be changed to you ip address when 
 //running the app on a mobile device rather than 
 //the web view
