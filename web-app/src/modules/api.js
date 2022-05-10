@@ -143,7 +143,7 @@ export const updateUserEmail = async (username, email) => {
   }
 }
 
-export const addEvent = async (title, date, location, description, imageURL, creator, time) => {
+export const addEvent = async (title, date, location, description, imageURL, creator, time, longitude, latitude) => {
     
   try{
       
@@ -154,7 +154,9 @@ export const addEvent = async (title, date, location, description, imageURL, cre
                       +"&location="+location
                       +"&imgURL="+imageURL
                       +"&creator="+creator
-                      +"&time="+time;
+                      +"&time="+time
+                      +"&longitude="+longitude
+                      +"&latitude="+latitude;
       
       console.log("this is the data: " + data);
       const response = await axios.post(`${domain}/events`, data);

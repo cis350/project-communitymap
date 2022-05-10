@@ -30,7 +30,6 @@ export default function Home({ route, navigation }) {
           <div className="flex-child">
               <h2>Google Map</h2>
           </div>
-          
       </div>
     </main>
   );

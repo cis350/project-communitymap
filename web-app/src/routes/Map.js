@@ -11,54 +11,39 @@ export default function Map() {
     lat: 39.966333,
     lng: -75.197123,
   };
-  let liveEvents = useRef({
-    data: [
-      {
-        name: 'event1',
-        coordinates: {
-          latitude: 39.966333,
-          longitude: -75.197123,
-        },
-      },
-      {
-        name: 'event1',
-        coordinates: {
-          latitude: 39.951641,
-          longitude: -75.152672,
-        },
-      },
-    ],
-  });
-  let userEvents = useRef({ data: [] });
-  // const [numEvents, setNumEvents] = useState(0);
-  // const [numUserEvents, setNumUserEvents] = useState(0);
 
-  // useEffect(() => {
-  //   async function fetchEvents() {
-  //     liveEvents.current = await getEventsList();
-  //     // update the state
-  //     setNumEvents(liveEvents.current.length);
-  //     console.log('liveEvents', liveEvents.current);
-  //   }
+  let liveEvents = useRef({data: []}); 
+  let userEvents = useRef({data: []}); 
+  const [numEvents, setNumEvents] = useState(0);
+  const [numUserEvents, setNumUserEvents] = useState(0);
+  
 
-  //   async function fetchUserEvents() {
-  //     userEvents.current = await getMyEvents(
-  //       localStorage.getItem('currentUser')
-  //     );
-  //     // update the state
-  //     setNumUserEvents(userEvents.current.length);
-  //     console.log('userEvents', userEvents.current);
-  //     console.log('user', localStorage.getItem('currentUser'));
-  //   }
+  useEffect(() =>{
+    async function fetchEvents(){
+      liveEvents.current = await getEventsList();
+      // update the state 
+      setNumEvents(liveEvents.current.length);
+      console.log(liveEvents.current.data[0].latitude)
+      console.log('This are liveEvents', liveEvents.current);
+    }
 
-  //   // we want to fetch the users frequently (5 s)
-  //   //we will use server polling with setInterval
-  //   setTimeout(() => {
-  //     fetchEvents();
-  //     fetchUserEvents();
-  //   }, 5000);
-  //   //fetchUsers();
-  // }, [numEvents, numUserEvents]);
+    async function fetchUserEvents(){
+      userEvents.current = await getMyEvents(localStorage.getItem('currentUser'));
+      // update the state 
+      setNumUserEvents(userEvents.current.length);
+      console.log('These are userEvents', userEvents.current);
+      
+      console.log("user", localStorage.getItem("currentUser"));
+    }
+
+    // we want to fetch the users frequently (5 s)
+    //we will use server polling with setInterval
+    setTimeout(() => {
+      fetchEvents();
+      fetchUserEvents();
+    }, 5000);
+    //fetchUsers();
+  },[numEvents, numUserEvents]);
 
   const Marker = (liveEvents) => {
     return <div className="eventPin"></div>;
@@ -89,6 +74,7 @@ export default function Map() {
             text="My Marker"
             color="red"
           />
+          <ul>{liveEvents.current.data.map(event =>  <Marker lat={event.latitude} lng={event.longitude}/>)}</ul>
           {/* <Marker
             lat={liveEvents.coordinates.latitude}
             lng={liveEvents.coordinates.longitude}

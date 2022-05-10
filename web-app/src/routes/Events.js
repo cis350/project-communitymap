@@ -17,6 +17,8 @@ export default function Events() {
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [time, setTime] = useState("");
+  const [long, setLong] = useState("");
+  const [lat, setLat] = useState("");
   const creator = localStorage.getItem("currentUser");
 
 
@@ -51,7 +53,7 @@ export default function Events() {
   },[numEvents, numUserEvents]);
 
   async function createEvent(e) {
-    let status = await addEvent(name, date, location, description, imageURL, creator, time);
+    let status = await addEvent(name, date, location, description, imageURL, creator, time, long, lat);
     console.log('Join Community event'); 
     console.log(status); 
   }
@@ -126,6 +128,20 @@ export default function Events() {
               type="text" 
               value={time}
               onChange={(e) => setTime(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Longitude: </label><input
+              type="text" 
+              value={long}
+              onChange={(e) => setLong(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Latitude: </label><input
+              type="text" 
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
             />
           </div>
         </form>
