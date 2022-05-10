@@ -208,6 +208,7 @@ test('deleteEvent deletes a event', async () =>{
 //event had name, description, date, time, location, imgURL, creator
 // 3. testing update
 test('updateDate updates a events date', async () =>{
+  jest.setTimeout(30000);
   // connect to the db
   db = await dbModule.connect(url);
   // add event

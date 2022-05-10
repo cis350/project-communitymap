@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.97% </span>
+                <span class="strong">44.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>73/166</span>
+                <span class='fraction'>75/168</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">29.82% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/55</span>
+                <span class='fraction'>17/57</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.97% </span>
+                <span class="strong">44.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>73/166</span>
+                <span class='fraction'>75/168</span>
             </div>
         
             
@@ -421,7 +421,18 @@
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
 <a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -430,6 +441,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -522,9 +539,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -771,11 +785,19 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -791,6 +813,12 @@ const url = 'mongodb+srv://cis350:cis350@cluster0.n8yq8.mongodb.net/350Proj?retr
 &nbsp;
 const webapp = express(); 
 &nbsp;
+//import path
+const path = require('path');
+&nbsp;
+//tell express where to find static files
+webapp.use(express.static(path.join(__dirname,'./web-app/build')));
+&nbsp;
 webapp.use(express.json());
 webapp.use(express.urlencoded({
     extended: true,
@@ -803,7 +831,7 @@ webapp.use(cors({
 &nbsp;
 //Change the localHost
 webapp.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:19006"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -879,10 +907,7 @@ webapp.post('/messages', <span class="fstat-no" title="function not covered" >( 
 &nbsp;
 });
 &nbsp;
-// Root endpoint
-webapp.get('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  res.json({ message: 'root' });</span>
-});
+&nbsp;
 &nbsp;
 //endpoints
 // 1. adding a new account endpoint
@@ -943,7 +968,7 @@ webapp.post('/events', async (_req, resp) =&gt; {
     try {
       await lib.addEvent(db, { name: _req.body.name, description: _req.body.description, 
         date: _req.body.date, location: _req.body.location, imgURL: _req.body.imgURL, 
-        time: _req.body.time, creator: _req.body.creator });
+        time: _req.body.time, creator: _req.body.creator, longitude: _req.body.longitude, latitude: _req.body.latitude});
       resp.status(201).json({ message: 'event with id added' });
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >      resp.status(500).json({ error: 'try again later' });</span>
@@ -1129,12 +1154,20 @@ webapp.use(<span class="fstat-no" title="function not covered" >(_</span>req, re
 <span class="cstat-no" title="statement not covered" >  res.status(404);</span>
 });
 &nbsp;
-const port = 8080; 
+&nbsp;
+// wildcard endpoint
+webapp.get('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  res.sendFile(path.join(__dirname,'./web-app/build/index.html'));</span>
+});
+&nbsp;
+const port = process.env.PORT || 8080; 
 &nbsp;
 webapp.listen(port, async () =&gt; {
   db = await lib.connect(url);
   console.log(`server running on port: ${port}`);
 }); 
+&nbsp;
+&nbsp;
 &nbsp;
 module.exports = webapp; // export to test
 &nbsp;</pre></td></tr></table></pre>
@@ -1144,7 +1177,7 @@ module.exports = webapp; // export to test
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue May 10 2022 04:48:51 GMT-0400 (Eastern Daylight Time)
+                at Tue May 10 2022 15:02:28 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
